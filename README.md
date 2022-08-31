@@ -51,8 +51,8 @@ Returns the information about the current user that is logged in.
 
 * Require Authentication: true
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /sessions/:userId
   * Body: none
 
 * Successful Response
@@ -305,8 +305,8 @@ Returns all the songs created by the specified artist.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /songs/user/:userId
   * Body: none
 
 * Successful Response
@@ -1194,8 +1194,8 @@ Returns all the Albums created by the current user.
 
 * Require Authentication: true
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /albums/user/:userId
   * Body: none
 
 * Successful Response
@@ -1226,8 +1226,8 @@ Returns all the albums created by the specified artist.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /artists/myalbums
   * Body: none
 
 * Successful Response
@@ -1271,8 +1271,8 @@ Returns the details of an album specified by its id.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: 
+  * URL: /user/:userid/album/:albumId
   * Body: none
 
 * Successful Response
@@ -1330,8 +1330,8 @@ Creates and returns a new album.
 
 * Require Authentication: true
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: POST
+  * URL: /albums
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1385,8 +1385,8 @@ Updates and returns an existing album.
 * Require Authentication: true
 * Require proper authorization: Album must belong to the current user
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: PUT
+  * URL: /albums/:albumId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1453,8 +1453,8 @@ Deletes an existing album.
 * Require Authentication: true
 * Require proper authorization: Album must belong to the current user
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: DELETE
+  * URL: /users/:userId/albums/:albumId
   * Body: none
 
 * Successful Response
@@ -1491,8 +1491,8 @@ Returns the details of an artist specified by their id.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /artists/:artistId
   * Body: none
 
 * Successful Response
@@ -1530,8 +1530,8 @@ Return songs filtered by query parameters.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /songs?:query=
   * Query Parameters
     * page: integer, minimum: 0, maximum: 10, default: 0
     * size: integer, minimum: 0, maximum: 20, default: 20
