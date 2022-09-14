@@ -3,11 +3,11 @@ const router = express.Router();
 const { Album } = require("../../db/models");
 
 router.post("/", async (req, res) => {
-  const { title, description, previewImage } = req.body;
+  const { title, description, imageUrl } = req.body;
   const newAlbum = await Album.create({
     title,
     description,
-    previewImage,
+    previewImage: imageUrl,
   });
 
   res.json(newAlbum);

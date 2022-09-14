@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Song } = require("../../db/models");
+const { Song, Album } = require("../../db/models");
 
 router.get("/", async (req, res) => {
   const songs = await Song.findAll();
