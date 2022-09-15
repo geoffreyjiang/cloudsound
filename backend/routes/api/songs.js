@@ -33,6 +33,12 @@ router.get("/current", restoreUser, async (req, res) => {
   res.json(songs);
 });
 
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  const song = await Song.findOne({ where: { id } });
+  res.json(song);
+});
+
 router.get("/", async (req, res) => {
   const songs = await Song.findAll();
   res.json(songs);
