@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Song, Album } = require("../../db/models");
+const { setTokenCookie, restoreUser } = require("../../utils/auth");
 
 router.post("/", async (req, res, next) => {
   const { title, description, url, imageUrl, albumId } = req.body;
@@ -24,7 +25,13 @@ router.post("/", async (req, res, next) => {
   res.json(song);
 });
 
-router.get("/current", async (req, res) => {});
+router.get("/current", restoreUser, async (req, res) => {
+  const { user } = req;
+  const current = user.toSafeObject();
+
+  const songs = await Song.findAll({ where: { userId: current.id } });
+  res.json(songs);
+});
 
 router.get("/", async (req, res) => {
   const songs = await Song.findAll();
