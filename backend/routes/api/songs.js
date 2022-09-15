@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
     title,
     description,
     url,
-    previewImage: imageUrl,
+    imageUrl,
     albumId,
   });
 

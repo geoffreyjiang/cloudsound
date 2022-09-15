@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
   const newAlbum = await Album.create({
     title,
     description,
-    previewImage: imageUrl,
+    imageUrl,
   });
 
   res.json(newAlbum);

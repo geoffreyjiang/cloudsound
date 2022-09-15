@@ -17,7 +17,7 @@ module.exports = {
       url: {
         type: Sequelize.STRING,
       },
-      previewImage: {
+      imageUrl: {
         type: Sequelize.STRING,
       },
       userId: {
