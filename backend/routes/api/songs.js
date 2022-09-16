@@ -12,23 +12,30 @@ router.post("/", restoreUser, async (req, res) => {
   if (!album) {
     const error = new Error("Album couldn't be found");
     error.status = 404;
+    error.errors = {
+      statusCode: 404,
+    };
     throw error;
   } else if (!title && !url) {
     const error = new Error("Validation Error");
     error.status = 400;
     error.errors = {
+      statusCode: 400,
       error: { title: "Song title is required", url: "Audio is required" },
     };
     throw error;
   } else if (!title) {
     const error = new Error("Validation Error");
     error.status = 400;
-    error.errors = { error: { title: "Song title is required" } };
+    error.errors = {
+      statusCode: 400,
+      error: { title: "Song title is required" },
+    };
     throw error;
   } else if (!url) {
     const error = new Error("Validation Error");
     error.status = 400;
-    error.errors = { error: { url: "Audio is required" } };
+    error.errors = { statusCode: 400, error: { url: "Audio is required" } };
     throw error;
   }
   const song = await Song.create({
@@ -51,14 +58,39 @@ router.get("/current", restoreUser, async (req, res) => {
   res.json(songs);
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", restoreUser, async (req, res) => {
   const { id } = req.params;
   const { title, description, url, imageUrl } = req.body;
-  const song = Song.findOne({ where: { id } });
+  const { user } = req;
+  const current = user.toSafeObject();
+  const song = await Song.findByPk(id);
+
   if (!song) {
     const error = new Error("Song couldn't be found");
     error.status = 404;
     throw error;
+  } else if (!title && !url) {
+    const error = new Error("Validation Error");
+    error.status = 400;
+    error.errors = {
+      statusCode: 400,
+      error: { title: "Song title is required", url: "Audio is required" },
+    };
+    throw error;
+  } else if (!title) {
+    const error = new Error("Validation Error");
+    error.status = 400;
+    error.errors = { error: { title: "Song title is required" } };
+    throw error;
+  } else if (!url) {
+    const error = new Error("Validation Error");
+    error.status = 400;
+    error.errors = { error: { url: "Audio is required" } };
+    throw error;
+  }
+
+  if (current.id === song.userId) {
+    await song.update({ title, description, url, imageUrl });
   }
 
   res.json(song);
