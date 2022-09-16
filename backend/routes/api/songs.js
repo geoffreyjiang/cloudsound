@@ -1,25 +1,43 @@
 const express = require("express");
 const router = express.Router();
-const { Song, Album } = require("../../db/models");
+const { Song, Album, User } = require("../../db/models");
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
 
-router.post("/", async (req, res) => {
+router.post("/", restoreUser, async (req, res) => {
+  const { user } = req;
+  const current = user.toSafeObject();
   const { title, description, url, imageUrl, albumId } = req.body;
-
   const album = await Album.findOne({ where: { id: albumId } });
 
   if (!album) {
     const error = new Error("Album couldn't be found");
     error.status = 404;
     throw error;
+  } else if (!title && !url) {
+    const error = new Error("Validation Error");
+    error.status = 400;
+    error.errors = {
+      error: { title: "Song title is required", url: "Audio is required" },
+    };
+    throw error;
+  } else if (!title) {
+    const error = new Error("Validation Error");
+    error.status = 400;
+    error.errors = { error: { title: "Song title is required" } };
+    throw error;
+  } else if (!url) {
+    const error = new Error("Validation Error");
+    error.status = 400;
+    error.errors = { error: { url: "Audio is required" } };
+    throw error;
   }
-
   const song = await Song.create({
     title,
     description,
     url,
     imageUrl,
     albumId,
+    userId: current.id,
   });
 
   res.json(song);
@@ -33,9 +51,28 @@ router.get("/current", restoreUser, async (req, res) => {
   res.json(songs);
 });
 
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { title, description, url, imageUrl } = req.body;
+  const song = Song.findOne({ where: { id } });
+  if (!song) {
+    const error = new Error("Song couldn't be found");
+    error.status = 404;
+    throw error;
+  }
+
+  res.json(song);
+});
+
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const song = await Song.findOne({ where: { id: req.params.id } });
+  const song = await Song.findOne({
+    where: { id },
+    include: [
+      { model: User, attributes: ["id", "username", "imageUrl"] },
+      { model: Album, attributes: ["id", "title", "imageUrl"] },
+    ],
+  });
   if (!song) {
     const error = new Error("Song couldn't be found");
     error.status = 404;
