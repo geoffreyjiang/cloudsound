@@ -3,7 +3,7 @@ const router = express.Router();
 const { Song, Album } = require("../../db/models");
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
 
-router.post("/", async (req, res, next) => {
+router.post("/", async (req, res) => {
   const { title, description, url, imageUrl, albumId } = req.body;
 
   const album = await Album.findOne({ where: { id: albumId } });
@@ -11,7 +11,7 @@ router.post("/", async (req, res, next) => {
   if (!album) {
     const error = new Error("Album couldn't be found");
     error.status = 404;
-    next(error);
+    throw error;
   }
 
   const song = await Song.create({
@@ -35,7 +35,12 @@ router.get("/current", restoreUser, async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const song = await Song.findOne({ where: { id } });
+  const song = await Song.findOne({ where: { id: req.params.id } });
+  if (!song) {
+    const error = new Error("Song couldn't be found");
+    error.status = 404;
+    throw error;
+  }
   res.json(song);
 });
 
