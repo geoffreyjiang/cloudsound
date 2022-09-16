@@ -10,11 +10,11 @@ router.post("/", restoreUser, async (req, res) => {
   const album = await Album.findOne({ where: { id: albumId } });
 
   if (!album) {
-    const error = new Error("Album couldn't be found");
-    error.status = 404;
-    error.errors = {
+    res.status(404);
+    res.json({
+      message: "Album couldn't be found",
       statusCode: 404,
-    };
+    });
     throw error;
   } else if (!title && !url) {
     const error = new Error("Validation Error");
@@ -58,7 +58,7 @@ router.get("/current", restoreUser, async (req, res) => {
   res.json(songs);
 });
 
-router.put("/:id", restoreUser, async (req, res) => {
+router.put("/:id", restoreUser, async (req, res, next) => {
   const { id } = req.params;
   const { title, description, url, imageUrl } = req.body;
   const { user } = req;
@@ -66,9 +66,11 @@ router.put("/:id", restoreUser, async (req, res) => {
   const song = await Song.findByPk(id);
 
   if (!song) {
-    const error = new Error("Song couldn't be found");
-    error.status = 404;
-    throw error;
+    res.status(404);
+    res.json({
+      message: "Song couldn't be found",
+      statusCode: 404,
+    });
   } else if (!title && !url) {
     const error = new Error("Validation Error");
     error.status = 400;
@@ -91,6 +93,9 @@ router.put("/:id", restoreUser, async (req, res) => {
 
   if (current.id === song.userId) {
     await song.update({ title, description, url, imageUrl });
+  } else {
+    const error = new Error("Invalid credentials");
+    throw error;
   }
 
   res.json(song);
