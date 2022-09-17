@@ -28,7 +28,6 @@ router.post("/:id/comments", restoreUser, async (req, res) => {
 router.get("/:id/comments", async (req, res) => {
   const { id } = req.params;
   const song = await Song.findOne({ where: { id } });
-  const comment = await Comment.findOne({ where: { songId: id } });
   if (!song) {
     res.status(404);
     res.json({
@@ -36,6 +35,10 @@ router.get("/:id/comments", async (req, res) => {
       statusCode: 404,
     });
   }
+  const comment = await Comment.findOne({
+    where: { songId: id },
+    include: [{ model: User, attributes: ["id", "username"] }],
+  });
   res.json(comment);
 });
 
