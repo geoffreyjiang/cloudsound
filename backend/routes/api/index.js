@@ -9,6 +9,7 @@ const usersRouter = require("./users.js");
 const songsRouter = require("./songs.js");
 const albumRouter = require("./album.js");
 const artistRouter = require("./artist.js");
+const commentRouter = require("./comments.js");
 router.use(restoreUser);
 
 router.use("/session", sessionRouter);
@@ -17,6 +18,7 @@ router.use("/users", usersRouter);
 router.use("/songs", songsRouter);
 router.use("/albums", albumRouter);
 router.use("/artists", artistRouter);
+router.use("/comments", commentRouter);
 
 // router.get("/restore-user", (req, res) => {
 //   return res.json(req.user);
