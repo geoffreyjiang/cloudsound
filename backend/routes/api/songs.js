@@ -1,8 +1,29 @@
 const express = require("express");
 const router = express.Router();
-const { Song, Album, User } = require("../../db/models");
+const { Song, Album, User, Comment } = require("../../db/models");
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
 
+router.post("/:id/comments", restoreUser, async (req, res) => {
+  const { id } = req.params;
+  const { body } = req.body;
+  const { user } = req;
+  const current = user.toSafeObject();
+  const song = await Song.findOne({ where: { id } });
+
+  if (!song) {
+    res.status(404);
+    res.json({
+      message: "Song couldn't be found",
+      statusCode: 404,
+    });
+  }
+  const comment = await Comment.create({
+    body,
+    songId: id,
+    userId: current.id,
+  });
+  res.json(comment);
+});
 router.post("/", restoreUser, async (req, res) => {
   const { user } = req;
   const current = user.toSafeObject();
