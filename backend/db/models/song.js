@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Song.belongsTo(models.Album, { foreignKey: "albumId" });
       Song.belongsTo(models.User, { as: "Artist", foreignKey: "userId" });
+      Song.hasMany(models.Comment, {
+        foreignKey: "songId",
+        onDelete: "CASCADE",
+      });
     }
   }
   Song.init(
