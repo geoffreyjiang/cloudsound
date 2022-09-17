@@ -17,6 +17,31 @@ router.post("/", restoreUser, async (req, res) => {
   res.json(newAlbum);
 });
 
+router.put("/:id", restoreUser, async (req, res, next) => {
+  const { id } = req.params;
+  const { title, description, imageUrl } = req.body;
+  const { user } = req;
+  const current = user.toSafeObject();
+  const album = await Album.findByPk(id);
+
+  if (!album) {
+    res.status(404);
+    res.json({
+      message: "Album couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  if (current.id === album.userId) {
+    await album.update({ title, description, imageUrl });
+  } else {
+    const error = new Error("Invalid credentials");
+    throw error;
+  }
+
+  res.json(album);
+});
+
 router.get("/current", restoreUser, async (req, res) => {
   const { user } = req;
   const current = user.toSafeObject();
