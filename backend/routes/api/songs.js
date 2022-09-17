@@ -106,14 +106,20 @@ router.get("/:id", async (req, res) => {
   const song = await Song.findOne({
     where: { id },
     include: [
-      { model: User, attributes: ["id", "username", "imageUrl"] },
+      {
+        model: User,
+        as: "Artist",
+        attributes: ["id", "username", "imageUrl"],
+      },
       { model: Album, attributes: ["id", "title", "imageUrl"] },
     ],
   });
   if (!song) {
-    const error = new Error("Song couldn't be found");
-    error.status = 404;
-    throw error;
+    res.status(404);
+    res.json({
+      message: "Song couldn't be found",
+      statusCode: 404,
+    });
   }
   res.json(song);
 });

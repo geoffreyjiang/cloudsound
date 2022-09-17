@@ -17,4 +17,17 @@ router.post("/", restoreUser, async (req, res) => {
   res.json(newAlbum);
 });
 
+router.get("/current", restoreUser, async (req, res) => {
+  const { user } = req;
+  const current = user.toSafeObject();
+
+  const albums = await Album.findAll({ where: { userId: current.id } });
+  res.json(albums);
+});
+
+router.get("/", async (req, res) => {
+  const album = await Album.findAll();
+  res.json(album);
+});
+
 module.exports = router;

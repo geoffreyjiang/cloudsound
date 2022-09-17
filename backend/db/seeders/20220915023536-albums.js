@@ -28,6 +28,14 @@ module.exports = {
           createdAt: Sequelize.literal("CURRENT_TIMESTAMP"),
           updatedAt: Sequelize.literal("CURRENT_TIMESTAMP"),
         },
+        {
+          userId: 4,
+          title: "THe album",
+          imageUrl: "pic",
+          description: "this album is the album",
+          createdAt: Sequelize.literal("CURRENT_TIMESTAMP"),
+          updatedAt: Sequelize.literal("CURRENT_TIMESTAMP"),
+        },
       ],
       {}
     );

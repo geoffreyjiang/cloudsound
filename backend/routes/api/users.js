@@ -27,19 +27,32 @@ const validateSignup = [
   handleValidationErrors,
 ];
 router.post("/", validateSignup, async (req, res) => {
-  const { email, password, username, firstName, lastName } = req.body;
+  const { email, password, username, firstName, lastName, imageUrl } = req.body;
+  const checkEmail = await User.findOne({ where: { email } });
+
+  if (checkEmail) {
+    res.status(403);
+    res.json({ statusCode: 403, message: "Email already exists" });
+  }
+
   const user = await User.signup({
     email,
     username,
     password,
     firstName,
     lastName,
+    imageUrl,
   });
 
-  await setTokenCookie(res, user);
-
+  // await setTokenCookie(res, user);
+  const token = await setTokenCookie(res, user);
   return res.json({
-    user,
+    id: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    username: user.username,
+    email: user.email,
+    token,
   });
 });
 module.exports = router;
