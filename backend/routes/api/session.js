@@ -29,17 +29,28 @@ router.post("/", validateLogin, async (req, res, next) => {
     return next(err);
   }
 
-  await setTokenCookie(res, user);
+  const token = await setTokenCookie(res, user);
 
   return res.json({
-    user,
+    id: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    token,
   });
 });
-router.get("/", restoreUser, (req, res) => {
+router.get("/", restoreUser, async (req, res) => {
   const { user } = req;
+  const current = user.toSafeObject();
+  const token = await setTokenCookie(res, user);
+
   if (user) {
     return res.json({
-      user: user.toSafeObject(),
+      id: current.id,
+      firstName: current.firstName,
+      lastName: current.lastName,
+      email: current.email,
+      token,
     });
   } else return res.json({});
 });

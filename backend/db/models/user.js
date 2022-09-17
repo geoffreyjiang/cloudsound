@@ -41,7 +41,10 @@ module.exports = (sequelize, DataTypes) => {
     }
     static associate(models) {
       User.hasMany(models.Song, { foreignKey: "userId", onDelete: "CASCADE" });
-      User.hasMany(models.Album, { foreignKey: "userId", onDelete: "CASCADE" });
+      User.hasMany(models.Album, {
+        foreignKey: "userId",
+        onDelete: "CASCADE",
+      });
     }
   }
 
@@ -86,6 +89,9 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           len: [60, 60],
         },
+      },
+      imageUrl: {
+        type: DataTypes.STRING,
       },
     },
     {
