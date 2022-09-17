@@ -24,6 +24,21 @@ router.post("/:id/comments", restoreUser, async (req, res) => {
   });
   res.json(comment);
 });
+
+router.get("/:id/comments", async (req, res) => {
+  const { id } = req.params;
+  const song = await Song.findOne({ where: { id } });
+  const comment = await Comment.findOne({ where: { songId: id } });
+  if (!song) {
+    res.status(404);
+    res.json({
+      message: "Song does not exist",
+      statusCode: 404,
+    });
+  }
+  res.json(comment);
+});
+
 router.post("/", restoreUser, async (req, res) => {
   const { user } = req;
   const current = user.toSafeObject();
