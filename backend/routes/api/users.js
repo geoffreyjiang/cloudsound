@@ -81,14 +81,14 @@ router.get("/:id", async (req, res) => {
       userId: Number(id),
     },
   });
-  user.dataValues.totalSongs = totalSongs;
-  user.dataValues.totalAlbums = totalAlbums;
 
   if (!user) {
     res
       .status(404)
       .json({ statusCode: 404, message: "Artist does not exists" });
   }
+  user.dataValues.totalSongs = totalSongs;
+  user.dataValues.totalAlbums = totalAlbums;
   res.json(user);
 });
 
