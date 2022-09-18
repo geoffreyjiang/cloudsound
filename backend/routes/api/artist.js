@@ -3,7 +3,7 @@ const router = express.Router();
 const { Album, Song, User } = require("../../db/models");
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
 
-router.get("/:id/albums", async (req, res) => {
+router.get("/:id/albums", restoreUser, async (req, res) => {
   const { user } = req;
   const current = user.toSafeObject();
 

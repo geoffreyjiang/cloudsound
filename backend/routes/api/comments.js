@@ -40,8 +40,7 @@ router.delete("/:id", restoreUser, async (req, res, next) => {
   });
 
   if (!comment) {
-    res.status(404);
-    res.json({
+    res.status(404).json({
       message: "Comment couldn't be found",
       statusCode: 404,
     });

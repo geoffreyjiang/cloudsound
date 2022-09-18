@@ -76,12 +76,12 @@ router.get("/:id", async (req, res) => {
     },
   });
 
-  user.dataValues.totalSongs = totalSongs;
   const totalAlbums = await Album.count({
     where: {
       userId: Number(id),
     },
   });
+  user.dataValues.totalSongs = totalSongs;
   user.dataValues.totalAlbums = totalAlbums;
 
   if (!user) {
