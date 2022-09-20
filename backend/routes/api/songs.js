@@ -164,8 +164,9 @@ router.get("/:id", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const songs = await Song.findAll();
   let { page, size } = req.query;
+
+  let limit, offset;
 
   if (!page) page = 1;
   if (!size) size = 3;
@@ -173,11 +174,12 @@ router.get("/", async (req, res) => {
   page = Number(page);
   size = Number(size);
 
-  const paginate = {};
   if (page >= 1 && size >= 1) {
-    paginate.limit = size;
-    paginate.offset = size * (page - 1);
+    limit = size;
+    offset = size * (page - 1);
   }
+
+  const songs = await Song.findAll({ limit, offset });
 
   res.json(songs);
 });
