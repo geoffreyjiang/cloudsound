@@ -13,6 +13,15 @@ router.post("/", restoreUser, async (req, res) => {
   const { name, imageUrl } = req.body;
   const { user } = req;
   const current = user.toSafeObject();
+  if (!name) {
+    res.status(400).json({
+      message: "Validation Error",
+      statusCode: 400,
+      errors: {
+        name: "Playlist name is required",
+      },
+    });
+  }
   const newPlaylist = await Playlist.create({
     userId: current.id,
     name: req.body.name,
@@ -31,11 +40,12 @@ router.get("/current", restoreUser, async (req, res) => {
 
 router.post("/:id/songs", restoreUser, async (req, res) => {
   const { id } = req.params;
-  const { songId } = req.body;
+  const { songId, name } = req.body;
   const { user } = req;
   const current = user.toSafeObject();
   const song = await Song.findByPk(songId);
   const playlist = await Playlist.findOne({ where: { id } });
+
   if (!song) {
     res.status(404).json({
       statusCode: 404,
@@ -73,12 +83,20 @@ router.put("/:id", restoreUser, async (req, res) => {
 
   if (!playlist) {
     res.status(404).json({ statusCode: 404, message: "Playlist not found" });
+  } else if (!name) {
+    res.status(400).json({
+      message: "Validation Error",
+      statusCode: 400,
+      errors: {
+        name: "Playlist name is required",
+      },
+    });
   }
   if (current.id === playlist.userId) {
     const update = await playlist.update({ name, imageUrl });
     res.json(update);
   } else {
-    res.status(403).json({ statusCode: 403, message: "Invalid Credentials" });
+    res.status(403).json({ statusCode: 403, message: "Forbidden" });
   }
 });
 
@@ -110,12 +128,11 @@ router.delete("/:id", async (req, res) => {
       statusCode: 404,
     });
   }
-
   if (current.id === playlist.userId) {
     playlist.destroy();
-    res.json("Deleted");
+    res.json("Successfully deleted");
   } else {
-    res.status(403).json({ message: "invalid credentials", statusCode: 403 });
+    res.status(403).json({ message: "Forbidden", statusCode: 403 });
   }
 });
 module.exports = router;

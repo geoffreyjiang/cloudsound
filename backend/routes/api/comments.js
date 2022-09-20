@@ -18,13 +18,19 @@ router.put("/:id", restoreUser, async (req, res, next) => {
       message: "Comment couldn't be found",
       statusCode: 404,
     });
+  } else if (!body) {
+    res.status(400).json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        body: "Comment body text is required",
+      },
+    });
   }
-
   if (current.id === comment.userId) {
     await comment.update({ body });
   } else {
-    const error = new Error("Invalid credentials");
-    throw error;
+    res.status(403).json({ message: "Forbidden", statusCode: 403 });
   }
 
   res.json(comment);
@@ -47,11 +53,10 @@ router.delete("/:id", restoreUser, async (req, res, next) => {
   if (current.id === comment.userId) {
     await comment.destroy();
     res.json({
-      message: "Deleted",
+      message: "Successfully deleted",
     });
   } else {
-    const error = new Error("Invalid credentials");
-    throw error;
+    res.status(403).json({ message: "Forbidden", statusCode: 403 });
   }
 });
 

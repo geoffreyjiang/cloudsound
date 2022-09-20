@@ -7,6 +7,16 @@ router.post("/", restoreUser, async (req, res) => {
   const { title, description, imageUrl, userId } = req.body;
   const { user } = req;
   const id = user.id;
+
+  if (!title) {
+    res.status(400).json({
+      message: "Validation Error",
+      statusCode: 400,
+      errors: {
+        title: "Album title is required",
+      },
+    });
+  }
   const newAlbum = await Album.create({
     title,
     description,
@@ -30,13 +40,20 @@ router.put("/:id", restoreUser, async (req, res, next) => {
       message: "Album couldn't be found",
       statusCode: 404,
     });
+  } else if (!title) {
+    res.status(400).json({
+      message: "Validation Error",
+      statusCode: 400,
+      errors: {
+        title: "Album title is required",
+      },
+    });
   }
 
   if (current.id === album.userId) {
     await album.update({ title, description, imageUrl });
   } else {
-    const error = new Error("Invalid credentials");
-    throw error;
+    res.status(403).json({ message: "Forbidden", statusCode: 403 });
   }
 
   res.json(album);
@@ -117,9 +134,9 @@ router.delete("/:id", async (req, res) => {
 
   if (current.id === album.userId) {
     album.destroy();
-    res.json("Deleted");
+    res.json("Successfully deleted");
   } else {
-    res.status(403).json({ message: "invalid credentials", statusCode: 403 });
+    res.status(403).json({ message: "Forbidden", statusCode: 403 });
   }
 });
 module.exports = router;

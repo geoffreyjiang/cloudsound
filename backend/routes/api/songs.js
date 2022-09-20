@@ -16,6 +16,14 @@ router.post("/:id/comments", restoreUser, async (req, res) => {
       message: "Song couldn't be found",
       statusCode: 404,
     });
+  } else if (!body) {
+    res.status(400).json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        body: "Comment body text is required",
+      },
+    });
   }
   const comment = await Comment.create({
     body,
@@ -54,7 +62,6 @@ router.post("/", restoreUser, async (req, res) => {
       message: "Album couldn't be found",
       statusCode: 404,
     });
-    throw error;
   } else if (!title && !url) {
     const error = new Error("Validation Error");
     error.status = 400;
@@ -199,9 +206,9 @@ router.delete("/:id", async (req, res) => {
 
   if (current.id === song.userId) {
     song.destroy();
-    res.json("Deleted");
+    res.json("Successfully deleted");
   } else {
-    res.status(403).json({ message: "invalid credentials", statusCode: 403 });
+    res.status(403).json({ message: "Forbidden", statusCode: 403 });
   }
 });
 

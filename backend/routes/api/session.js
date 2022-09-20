@@ -57,7 +57,7 @@ router.get("/", restoreUser, async (req, res) => {
 
 router.delete("/", (_req, res) => {
   res.clearCookie("token");
-  return res.json({ message: "success" });
+  return res.json({ message: "Successfully deleted" });
 });
 
 module.exports = router;
