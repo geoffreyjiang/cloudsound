@@ -14,8 +14,13 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "songId",
         onDelete: "CASCADE",
       });
+      Song.belongsToMany(models.Playlist, {
+        through: models.PlaylistSong,
+        foreignKey: "songId",
+      });
     }
   }
+
   Song.init(
     {
       title: DataTypes.STRING,
