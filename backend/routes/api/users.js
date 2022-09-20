@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { User, Song, Album } = require("../../db/models");
+const { User, Song, Album, Playlist } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { Op } = require("sequelize");
@@ -55,6 +55,60 @@ router.post("/", validateSignup, async (req, res) => {
     email: user.email,
     token,
   });
+});
+
+router.get("/:id/songs", async (req, res, next) => {
+  const { id } = req.params;
+  const songs = await User.findByPk(id, {
+    include: {
+      model: Song,
+      attributes: [
+        "id",
+        "userId",
+        "title",
+        "description",
+        "url",
+        "imageUrl",
+        "createdAt",
+        "updatedAt",
+      ],
+    },
+  });
+  if (!songs) {
+    res.status(404);
+    res.json({
+      statusCode: "404",
+      message: "Artist couldn't be found",
+    });
+  }
+
+  res.json(songs);
+});
+
+router.get("/:id/playlists", async (req, res) => {
+  const { id } = req.params;
+  const playlists = await User.findByPk(id, {
+    include: {
+      model: Playlist,
+      attributes: [
+        "id",
+        "userId",
+        "name",
+        "imageUrl",
+        "createdAt",
+        "updatedAt",
+      ],
+    },
+  });
+  if (!playlists) {
+    res.status(404);
+    res.json({
+      statusCode: 404,
+      message: "Artist couldn't be found",
+    });
+  }
+
+  res.json(playlists);
 });
 
 router.get("/:id", async (req, res) => {

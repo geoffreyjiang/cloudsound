@@ -86,6 +86,17 @@ router.get("/:id", async (req, res) => {
 
   res.json(album);
 });
+router.post("/:id/songs", async (req, res) => {
+  const { id } = req.params;
+  const album = await Album.findOne({ where: { id } });
+  if (!album) {
+    res.status(404).json({
+      message: "Album does not exist",
+      statusCode: "404",
+    });
+  }
+});
+
 router.get("/", async (req, res) => {
   const album = await Album.findAll();
   res.json(album);

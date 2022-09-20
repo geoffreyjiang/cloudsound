@@ -44,6 +44,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userId",
         onDelete: "CASCADE",
       });
+      User.hasMany(models.Playlist, { foreignKey: "userId" });
       User.hasMany(models.Song, { foreignKey: "userId", onDelete: "CASCADE" });
       User.hasMany(models.Album, {
         foreignKey: "userId",
