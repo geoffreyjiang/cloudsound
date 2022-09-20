@@ -102,4 +102,24 @@ router.get("/", async (req, res) => {
   res.json(album);
 });
 
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { user } = req;
+  const current = user.toSafeObject();
+  const album = await Album.findOne({ where: { id } });
+
+  if (!album) {
+    res.status(404).json({
+      message: "Album not found",
+      statusCode: 404,
+    });
+  }
+
+  if (current.id === album.userId) {
+    album.destroy();
+    res.json("Deleted");
+  } else {
+    res.status(403).json({ message: "invalid credentials", statusCode: 403 });
+  }
+});
 module.exports = router;

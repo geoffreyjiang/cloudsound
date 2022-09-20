@@ -32,7 +32,6 @@ router.put("/:id", restoreUser, async (req, res, next) => {
 
 router.delete("/:id", restoreUser, async (req, res, next) => {
   const { id } = req.params;
-  const { body } = req.body;
   const { user } = req;
   const current = user.toSafeObject();
   const comment = await Comment.findOne({

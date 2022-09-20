@@ -22,6 +22,13 @@ router.post("/", restoreUser, async (req, res) => {
   res.json(newPlaylist);
 });
 
+router.get("/current", restoreUser, async (req, res) => {
+  const { user } = req;
+  const current = user.toSafeObject();
+  const playlists = await Playlist.findAll({ where: { userId: current.id } });
+  res.json(playlists);
+});
+
 router.post("/:id/songs", restoreUser, async (req, res) => {
   const { id } = req.params;
   const { songId } = req.body;
@@ -48,7 +55,6 @@ router.post("/:id/songs", restoreUser, async (req, res) => {
       playlistId: playlist.id,
       songId: song.id,
     });
-    // const data = PlaylistSong.findAll();
     res.json(playlistSong);
   } else {
     res.status(403).json({
@@ -58,4 +64,58 @@ router.post("/:id/songs", restoreUser, async (req, res) => {
   }
 });
 
+router.put("/:id", restoreUser, async (req, res) => {
+  const { id } = req.params;
+  const { user } = req;
+  const current = user.toSafeObject();
+  const playlist = await Playlist.findByPk(id);
+  const { name, imageUrl } = req.body;
+
+  if (!playlist) {
+    res.status(404).json({ statusCode: 404, message: "Playlist not found" });
+  }
+  if (current.id === playlist.userId) {
+    const update = await playlist.update({ name, imageUrl });
+    res.json(update);
+  } else {
+    res.status(403).json({ statusCode: 403, message: "Invalid Credentials" });
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  const playlist = await Playlist.findByPk(id, {
+    include: [{ model: Song, through: { attributes: [] } }],
+  });
+
+  if (!playlist) {
+    res.status(404).json({
+      statusCode: 404,
+      message: "Playlist couldn't be found",
+    });
+  }
+  res.json(playlist);
+});
+
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { user } = req;
+  const current = user.toSafeObject();
+  const playlist = await Playlist.findOne({ where: { id } });
+
+  if (!playlist) {
+    res.status(404).json({
+      message: "Playlist not found",
+      statusCode: 404,
+    });
+  }
+
+  if (current.id === playlist.userId) {
+    playlist.destroy();
+    res.json("Deleted");
+  } else {
+    res.status(403).json({ message: "invalid credentials", statusCode: 403 });
+  }
+});
 module.exports = router;
