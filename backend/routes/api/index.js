@@ -10,7 +10,7 @@ const songsRouter = require("./songs.js");
 const albumRouter = require("./album.js");
 const artistRouter = require("./artist.js");
 const commentRouter = require("./comments.js");
-const playlistRouter = require("./album.js");
+const playlistRouter = require("./playlist.js");
 
 router.use(restoreUser);
 

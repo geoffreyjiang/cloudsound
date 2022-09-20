@@ -9,7 +9,7 @@ router.post("/", restoreUser, async (req, res) => {
   const current = user.toSafeObject();
   const newPlaylist = await Playlist.create({
     userId: current.id,
-    name,
+    name: req.body.name,
     imageUrl,
   });
 
