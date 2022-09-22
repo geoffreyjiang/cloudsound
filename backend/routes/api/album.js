@@ -133,7 +133,7 @@ router.delete("/:id", async (req, res) => {
   }
 
   if (current.id === album.userId) {
-    album.destroy();
+    await album.destroy();
     res.json("Successfully deleted");
   } else {
     res.status(403).json({ message: "Forbidden", statusCode: 403 });

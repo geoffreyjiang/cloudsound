@@ -129,7 +129,7 @@ router.delete("/:id", async (req, res) => {
     });
   }
   if (current.id === playlist.userId) {
-    playlist.destroy();
+    await playlist.destroy();
     res.json("Successfully deleted");
   } else {
     res.status(403).json({ message: "Forbidden", statusCode: 403 });

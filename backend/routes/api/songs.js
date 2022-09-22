@@ -149,6 +149,7 @@ router.put("/:id", restoreUser, async (req, res, next) => {
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
+  const { user } = req;
   const song = await Song.findOne({
     where: { id },
     include: [
@@ -205,7 +206,7 @@ router.delete("/:id", async (req, res) => {
   }
 
   if (current.id === song.userId) {
-    song.destroy();
+    await song.destroy();
     res.json("Successfully deleted");
   } else {
     res.status(403).json({ message: "Forbidden", statusCode: 403 });
