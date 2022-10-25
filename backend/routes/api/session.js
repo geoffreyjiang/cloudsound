@@ -50,6 +50,7 @@ router.get("/", restoreUser, async (req, res) => {
       lastName: user.lastName,
       email: user.email,
       imageUrl: user.imageUrl,
+      username: user.username,
     });
   } else return res.json({});
 });

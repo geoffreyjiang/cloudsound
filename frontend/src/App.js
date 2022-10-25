@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupForm from "./components/SignupForm";
 import Navigation from "./components/Navigation";
-
+import GetAllSongs from "./components/Songs";
 import * as sessionActions from "./store/session";
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +23,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupForm />
+          </Route>
+          <Route path="/songs">
+            <GetAllSongs />
           </Route>
         </Switch>
       )}

@@ -63,8 +63,6 @@ const sessionReducer = (state = initialState, action) => {
   let copy = { ...state };
   switch (action.type) {
     case SET:
-      // console.log(copy);
-      console.log(action.user);
       if (Object.keys(action.user).length) copy.user = action.user;
       return copy;
     case REMOVE:
