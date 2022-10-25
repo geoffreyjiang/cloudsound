@@ -5,6 +5,7 @@ const { User } = require("../db/models");
 const { secret, expiresIn } = jwtConfig;
 const setTokenCookie = (res, user) => {
   // Create the token.
+  console.log(user, "line 8");
   const token = jwt.sign(
     { data: user.toSafeObject() },
     secret,
@@ -27,7 +28,7 @@ const setTokenCookie = (res, user) => {
 const restoreUser = (req, res, next) => {
   // token parsed from cookies
   const { token } = req.cookies;
-  req.user = null;
+  // req.user = null;
 
   return jwt.verify(token, secret, null, async (err, jwtPayload) => {
     if (err) {

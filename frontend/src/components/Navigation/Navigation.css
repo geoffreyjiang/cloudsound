@@ -1,0 +1,22 @@
+nav {
+  width: auto;
+  /* float: right; */
+  margin-top: 8px;
+  justify-content: center;
+}
+
+.nav-list {
+  display: inline-block;
+  padding: 15px 30px;
+  text-align: center;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 15px 30px;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+}

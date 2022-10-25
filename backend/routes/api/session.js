@@ -41,17 +41,15 @@ router.post("/", validateLogin, async (req, res, next) => {
 });
 router.get("/", restoreUser, async (req, res) => {
   const { user } = req;
-  const current = user.toSafeObject();
-  const token = await setTokenCookie(res, user);
-  user.dataValues.imageUrl = "image.url";
+  // const current = user.toSafeObject();
+  // user.dataValues.imageUrl = "image.url";
   if (user) {
     return res.json({
-      id: current.id,
-      firstName: current.firstName,
-      lastName: current.lastName,
-      email: current.email,
-      imageUrl: current.imageUrl,
-      token,
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      imageUrl: user.imageUrl,
     });
   } else return res.json({});
 });
