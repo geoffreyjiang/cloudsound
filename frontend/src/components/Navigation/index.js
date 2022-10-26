@@ -11,15 +11,11 @@ function Navigation({ isLoaded }) {
     sessionLinks = <ProfileButton user={sessionUser} />;
   } else {
     sessionLinks = (
-      <>
-        <NavLink className="nav-link" to="/signup">
-          Sign Up
-        </NavLink>
+      <span>
+        <NavLink to="/signup">Sign Up</NavLink>
         {" || "}
-        <NavLink to="/login" className="nav-link">
-          Log In
-        </NavLink>
-      </>
+        <NavLink to="/login">Log In</NavLink>
+      </span>
     );
   }
 

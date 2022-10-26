@@ -1,28 +1,3 @@
-/* ul {
-  list-style-type: none;
-}
-.navBar {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-weight: 300;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navLink {
-  display: inline-block;
-} */
-
-/* * {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-} */
-
 .navBar {
   display: flex;
   justify-content: space-between;
@@ -49,6 +24,7 @@ ul {
   color: black;
   font-size: 18px;
   text-decoration: none;
+
   margin: 15px;
   position: relative;
 }
