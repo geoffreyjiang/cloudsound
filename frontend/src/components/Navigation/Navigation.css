@@ -24,9 +24,11 @@ ul {
   color: black;
   font-size: 18px;
   text-decoration: none;
-
+  display: flex;
   margin: 15px;
   position: relative;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-links > a :hover {

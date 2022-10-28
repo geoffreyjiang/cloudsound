@@ -5,16 +5,26 @@ import "./Songs.css";
 const GetAllSongs = () => {
   const songs = useSelector((state) => Object.values(state.songs));
   const dispatch = useDispatch();
-  console.log(songs);
+  // console.log(songs);
   useEffect(() => {
     dispatch(getAllSongs());
   }, [dispatch]);
-  songs.forEach((el) => console.log(el.title));
+  //   songs.forEach((el) => console.log(el.title));
   const data = songs.map((el) => {
     return (
       <>
-        <img src={el.imageUrl} alt="" width="100" height="100"></img>
-        <h2>{el.title}</h2>
+        <img
+          src={el.imageUrl}
+          key={el.id}
+          alt=""
+          width="100"
+          height="100"
+        ></img>
+        <div key={el.id} className="card">
+          <a key={el.id} href={`/songs/${el.id}`}>
+            {el.title}
+          </a>
+        </div>
       </>
     );
   });

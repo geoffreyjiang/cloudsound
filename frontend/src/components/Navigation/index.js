@@ -20,20 +20,22 @@ function Navigation({ isLoaded }) {
   }
 
   return (
-    <nav className="navBar">
-      <span className="logo">
-        <NavLink className="logo" exact to="/">
-          <i className="fa-brands fa-soundcloud fa-2x"></i>
-          <span href="/">CloudSound</span>
-        </NavLink>
-      </span>
-      <div className="nav-links">
+    <>
+      <nav className="navBar">
+        <span className="logo">
+          <NavLink className="logo" exact to="/">
+            <i className="fa-brands fa-soundcloud fa-2x"></i>
+            <span href="/">CloudSound</span>
+          </NavLink>
+        </span>
+        <div className="nav-links"></div>
+        <a href="artists">Artists</a>
         <a href="/songs">Songs</a>
         <a href="/albums">Albums</a>
         <a href="/create">Upload</a>
-      </div>
-      {sessionLinks}
-    </nav>
+        {sessionLinks}
+      </nav>
+    </>
   );
 }
 
