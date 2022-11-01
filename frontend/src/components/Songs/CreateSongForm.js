@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createASong } from "../../store/songs";
+import { createSong } from "../../store/songs";
 import { useHistory } from "react-router-dom";
 
 const CreateSongForm = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory();
-  // console.log(sessionUser);
+  console.log(sessionUser.id);
   const [title, setTitle] = useState("");
-  const [imageUrl, setImageUrl] = useState();
+  const [imageUrl, setImageUrl] = useState("");
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
   // const [errors, setErrors] = useState([]);
@@ -18,13 +18,14 @@ const CreateSongForm = () => {
     e.preventDefault();
 
     const data = {
-      id: sessionUser.id,
       title,
-      // imageUrl,
-      // url,
+      imageUrl,
+      url,
       description,
+      // userId: sessionUser.id,
     };
-    let newSong = await dispatch(createASong(data));
+    console.log(data);
+    let newSong = await dispatch(createSong(data));
     console.log(newSong);
     // if (newSong) {
     //   history.push(`/songs/${newSong.id}`);
@@ -48,7 +49,7 @@ const CreateSongForm = () => {
             <label>Upload Image</label>
             <input
               type="input"
-              name="title"
+              name="image"
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
             ></input>
@@ -58,7 +59,7 @@ const CreateSongForm = () => {
             <label>Upload Song</label>
             <input
               type="input"
-              name="title"
+              name="song"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
             ></input>
@@ -67,7 +68,7 @@ const CreateSongForm = () => {
             <label>Description</label>
             <textarea
               type="text"
-              name="title"
+              name="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
