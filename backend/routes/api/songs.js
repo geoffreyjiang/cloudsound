@@ -53,16 +53,18 @@ router.get("/:id/comments", async (req, res) => {
 router.post("/", restoreUser, async (req, res) => {
   const { user } = req;
   const current = user.toSafeObject();
-  const { title, description, url, imageUrl, albumId } = req.body;
-  const album = await Album.findOne({ where: { id: albumId } });
+  // const { title, description, url, imageUrl, albumId } = req.body;
+  // const album = await Album.findOne({ where: { id: albumId } });
+  const { title, description, url, imageUrl } = req.body;
 
-  if (!album) {
-    res.status(404);
-    res.json({
-      message: "Album couldn't be found",
-      statusCode: 404,
-    });
-  } else if (!title && !url) {
+  // if (!album) {
+  //   res.status(404);
+  //   res.json({
+  //     message: "Album couldn't be found",
+  //     statusCode: 404,
+  //   });
+  // } else
+  if (!title && !url) {
     const error = new Error("Validation Error");
     error.status = 400;
     error.errors = {
@@ -89,7 +91,7 @@ router.post("/", restoreUser, async (req, res) => {
     description,
     url,
     imageUrl,
-    albumId,
+    // albumId,
     userId: current.id,
   });
 

@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createSong } from "../../store/songs";
+import { createSong, getAllSongs } from "../../store/songs";
 import { useHistory } from "react-router-dom";
-
 const CreateSongForm = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory();
-  console.log(sessionUser.id);
+  // console.log(sessionUser.id);
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [url, setUrl] = useState("");
@@ -14,6 +13,11 @@ const CreateSongForm = () => {
   // const [errors, setErrors] = useState([]);
   // const [disabled, setDisabled] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllSongs());
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -22,11 +26,10 @@ const CreateSongForm = () => {
       imageUrl,
       url,
       description,
-      // userId: sessionUser.id,
+      userId: sessionUser.id,
     };
     console.log(data);
     let newSong = await dispatch(createSong(data));
-    console.log(newSong);
     // if (newSong) {
     //   history.push(`/songs/${newSong.id}`);
     // }

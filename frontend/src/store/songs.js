@@ -45,12 +45,11 @@ export const createSong = (song) => async (dispatch) => {
     },
     body: JSON.stringify(song),
   });
-  // console.log(song);
-  console.log(res);
-  const data = await res.json();
-  console.log(data);
-  dispatch(addSong(data));
-  return res;
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(addSong(data));
+    return res;
+  }
 };
 export const songById = (id) => async (dispatch) => {
   const res = await csrfFetch(`/api/songs/${id}`, {
@@ -75,13 +74,13 @@ export const updateSong = (id, song) => async (dispatch) => {
 const songsReducer = (state = {}, action) => {
   // let newState = { ...state };
   let newState = { ...state };
-  console.log(action);
+  console.log(action.song);
   // action.songs.forEach((el) => console.log(el));
   switch (action.type) {
     case GET:
       return { ...state, ...action.songs };
     case ADD:
-      newState[action.songs.id] = action.songs;
+      newState[action.song.id] = action.song;
       return newState;
     case UPDATE:
       newState = { ...state, [action.song.id]: action.song };
