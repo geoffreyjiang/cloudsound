@@ -20,6 +20,10 @@ const CreateSongForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // console.log(title, "title");
+    // console.log(imageUrl, "img");
+    // console.log(url, "url");
+    // console.log(description, "description");
 
     const data = {
       title,
@@ -28,11 +32,10 @@ const CreateSongForm = () => {
       description,
       userId: sessionUser.id,
     };
-    console.log(data);
     let newSong = await dispatch(createSong(data));
-    // if (newSong) {
-    //   history.push(`/songs/${newSong.id}`);
-    // }
+    if (newSong) {
+      history.push(`/songs`);
+    }
   };
 
   return (

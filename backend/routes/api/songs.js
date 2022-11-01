@@ -106,7 +106,7 @@ router.get("/current", restoreUser, async (req, res) => {
   res.json(songs);
 });
 
-router.put("/:id", restoreUser, async (req, res, next) => {
+router.put("/:id", restoreUser, async (req, res) => {
   const { id } = req.params;
   const { title, description, url, imageUrl } = req.body;
   const { user } = req;

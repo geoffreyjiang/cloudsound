@@ -6,7 +6,7 @@ const SongDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const songs = useSelector((state) => state);
-
+  // console.log(id);
   const song = useSelector((state) => Object.values(state.songs));
   useEffect(() => {
     const load = async () => {
@@ -14,9 +14,10 @@ const SongDetail = () => {
       //   dispatch(getAllSongs());
     };
     load();
-  }, [dispatch, id]);
-  console.log(songs);
+  }, [id, dispatch]);
+  // console.log(songs);
   const details = song.map((el) => {
+    console.log(el);
     return (
       <>
         <div className="song-card">

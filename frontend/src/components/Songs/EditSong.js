@@ -2,22 +2,31 @@ import { useSelector } from "react-redux";
 import { updateSong, songById } from "../../store/songs";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 const EditSong = () => {
   const user = useSelector((state) => state.session.user);
   const song = useSelector((state) => Object.values(state.songs));
+  const history = useHistory();
   console.log(user.id);
   let userId;
+  let t;
+  let i;
+  let u;
+  let d;
   song.forEach((el) => {
-    userId = el.id;
+    console.log(el.userId);
+    userId = el.userId;
+    t = el.title;
+    u = el.url;
+    d = el.description;
   });
   console.log(userId);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [title, setTitle] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [url, setUrl] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(t);
+  const [imageUrl, setImageUrl] = useState(i);
+  const [url, setUrl] = useState(u);
+  const [description, setDescription] = useState(d);
   //   useEffect(() => {
   //     song.forEach((el) => {
   //       return (
@@ -28,43 +37,41 @@ const EditSong = () => {
   //     });
   //   }, [title, imageUrl, description]);
 
-  if (!title) {
-    song.forEach((el) => {
-      return (
-        setTitle(el.title),
-        setImageUrl(el.imageUrl),
-        setDescription(el.description),
-        setUrl(el.url)
-      );
-    });
-  }
+  // if (!title) {
+  //   song.forEach((el) => {
+  //     return (
+  //       setTitle(t),
+  //       setImageUrl(el.imageUrl),
+  //       setDescription(el.description),
+  //       setUrl(el.url)
+  //     );
+  //   });
+  // }
   useEffect(() => {
     dispatch(songById(id));
-    dispatch(updateSong());
+    // dispatch(updateSong());
   }, [dispatch, id]);
 
-  // if (!user || user.id !== userId) {
-  //   return (
-  //     <div>
-  //       <div> This is not your song!</div>
-  //     </div>
-  //   );
-  // }
+  if (!user || user.id !== userId) {
+    return (
+      <div>
+        <div> This is not your song!</div>
+      </div>
+    );
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = {
-      id: user.id,
       title,
       imageUrl,
       url,
       description,
     };
-    let newSong = await dispatch(updateSong(user.id, data));
-    console.log(newSong);
-    // if (newSong) {
-    //   history.push(`/songs/${newSong.id}`);
-    // }
+    let newSong = await dispatch(updateSong(id, data));
+    if (newSong) {
+      history.push(`/songs`);
+    }
   };
 
   return (
