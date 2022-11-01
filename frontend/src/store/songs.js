@@ -1,17 +1,23 @@
 import { csrfFetch } from "./csrf";
-const GET = "/songs/getSongs";
+// const GET = "/songs/getSongs";
 const ADD = "/songs/addSong";
 // const DELETE = "/songs/deleteSong";
 const UPDATE = "/songs/updateSong";
 const GetSongById = "/songs/songId";
-const getSongs = (song) => ({
-  type: GET,
-  song,
-});
+const LOAD = "/songs/load";
+// const getSongs = (song) => ({
+//   type: GET,
+//   song,
+// });
 const editSong = (song) => ({
   type: UPDATE,
   song,
 });
+const loadSongs = (songs) => ({
+  type: LOAD,
+  songs,
+});
+
 const addSong = (song) => ({
   type: ADD,
   song,
@@ -27,16 +33,6 @@ const songId = (song) => ({
   song,
 });
 
-export const getAllSongs = () => async (dispatch) => {
-  const res = await csrfFetch("/api/songs");
-  if (res.ok) {
-    const data = await res.json();
-    console.log(data);
-    dispatch(getSongs(data));
-    return res;
-  }
-};
-
 export const createSong = (song) => async (dispatch) => {
   const res = await csrfFetch("/api/songs", {
     method: "POST",
@@ -48,7 +44,7 @@ export const createSong = (song) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     dispatch(addSong(data));
-    return res;
+    return data;
   }
 };
 export const songById = (id) => async (dispatch) => {
@@ -66,8 +62,8 @@ export const songById = (id) => async (dispatch) => {
 };
 
 export const updateSong = (id, song) => async (dispatch) => {
-  console.log(id, "updateID");
-  console.log(song, "updateSong");
+  // console.log(id, "updateID");
+  // console.log(song, "updateSong");
   const res = await csrfFetch(`/api/songs/${id}`, {
     method: "PUT",
     body: JSON.stringify(song),
@@ -78,14 +74,35 @@ export const updateSong = (id, song) => async (dispatch) => {
   }
   return res;
 };
+
+export const getAllSongs = () => async (dispatch) => {
+  const res = await csrfFetch("/api/songs");
+  // console.log(res);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(loadSongs(data));
+    return data;
+  }
+};
+
 const songsReducer = (state = {}, action) => {
-  // let newState = { ...state };
   let newState = { ...state };
   // console.log(action.song);
   // action.songs.forEach((el) => console.log(el));
   switch (action.type) {
-    case GET:
-      return { ...state, ...action.song };
+    // case GET:
+    //   // return { ...action.songs };
+    //   return { ...state, ...action.song };
+
+    case LOAD:
+      // const n = { ...state };
+      action.songs.forEach((el) => {
+        newState[el.id] = el;
+      });
+      return {
+        ...state,
+        ...newState,
+      };
     case ADD:
       newState[action.song.id] = action.song;
       console.log(newState);

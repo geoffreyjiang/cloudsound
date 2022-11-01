@@ -43,10 +43,17 @@ router.get("/:id/comments", async (req, res) => {
       statusCode: 404,
     });
   }
-  const comment = await Comment.findOne({
+  // console.log(song, "LINE46");
+  // const comment = await Comment.findOne({
+  //   where: { songId: id },
+  //   include: [{ model: User, attributes: ["id", "username"] }],
+  // });
+  const comment = await Comment.findAll({
     where: { songId: id },
     include: [{ model: User, attributes: ["id", "username"] }],
   });
+  // console.log(comment);
+  // console.log(comment, "/ID/COMMENTS");
   res.json(comment);
 });
 

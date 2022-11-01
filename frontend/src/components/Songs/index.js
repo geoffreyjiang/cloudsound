@@ -5,10 +5,10 @@ import "./Songs.css";
 const GetAllSongs = () => {
   const songs = useSelector((state) => Object.values(state.songs));
   const dispatch = useDispatch();
-  // console.log(songs);
   useEffect(() => {
     dispatch(getAllSongs());
   }, [dispatch]);
+  console.log(songs);
   //   songs.forEach((el) => console.log(el.title));
   const data = songs.map((el) => {
     return (
