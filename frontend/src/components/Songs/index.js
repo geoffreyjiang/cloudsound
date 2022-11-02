@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { getAllSongs } from "../../store/songs";
 import { useDispatch, useSelector } from "react-redux";
 import "./Songs.css";
+import { useHistory } from "react-router-dom";
 const GetAllSongs = () => {
   const songs = useSelector((state) => Object.values(state.songs));
   const dispatch = useDispatch();
+  const history = useHistory();
   useEffect(() => {
     const load = async () => {
       dispatch(getAllSongs());
@@ -16,14 +18,12 @@ const GetAllSongs = () => {
   let data;
   if (songs) {
     data = songs.map((el) => {
+      // const imgClick = () => {
+      //   `/songs/${el.id}`;
+      // };
       return (
         <div key={el.id} className="card" href={`/songs/${el.id}`}>
-          <img
-            src={el.imageUrl}
-            alt="no pic avail!"
-            width="100"
-            height="100"
-          ></img>
+          <img className="card-img" src={el.imageUrl} alt="no pic avail!"></img>
           <a className="song-title" href={`/songs/${el.id}`}>
             {el.title}
           </a>
