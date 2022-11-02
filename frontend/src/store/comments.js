@@ -19,7 +19,7 @@ const create = (comment) => {
 
 export const getComments = (id) => async (dispatch) => {
   const res = await csrfFetch(`/api/songs/${id}/comments`);
-  console.log(res);
+  // console.log(res);
   if (res.ok) {
     const data = await res.json();
     dispatch(load(data));

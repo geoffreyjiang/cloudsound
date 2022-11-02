@@ -186,7 +186,7 @@ router.get("/", async (req, res) => {
   let limit, offset;
 
   if (!page) page = 1;
-  if (!size) size = 3;
+  if (!size) size = 8;
 
   page = Number(page);
   size = Number(size);
@@ -196,7 +196,8 @@ router.get("/", async (req, res) => {
     offset = size * (page - 1);
   }
 
-  const songs = await Song.findAll({ limit, offset });
+  // const songs = await Song.findAll({ limit, offset });
+  const songs = await Song.findAll();
 
   res.json(songs);
 });

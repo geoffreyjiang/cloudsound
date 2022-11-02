@@ -33,11 +33,11 @@ function App() {
           <Route exact path="/songs/:id">
             <SongDetail />
           </Route>
-          <Route path="/songs">
-            <GetAllSongs />
-          </Route>
           <Route path="/create">
             <CreateSongForm />
+          </Route>
+          <Route path="/songs">
+            <GetAllSongs />
           </Route>
         </Switch>
       )}

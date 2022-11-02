@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createSong, getAllSongs } from "../../store/songs";
+import { createSong } from "../../store/songs";
 import { useHistory } from "react-router-dom";
 const CreateSongForm = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -14,9 +14,9 @@ const CreateSongForm = () => {
   // const [disabled, setDisabled] = useState(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllSongs());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAllSongs());
+  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
