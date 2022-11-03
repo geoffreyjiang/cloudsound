@@ -72,7 +72,7 @@ export const getAllSongs = () => async (dispatch) => {
   }
 };
 export const createSong = (song) => async (dispatch) => {
-  console.log(song);
+  // console.log(song);
   const res = await csrfFetch("/api/songs", {
     method: "POST",
     headers: {

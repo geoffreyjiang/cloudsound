@@ -4,32 +4,113 @@
 } */
 
 * {
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
+body {
+  background-color: grey;
+}
 .wrapper {
-  display: block;
+  /* display: block;
   width: 100%;
   overflow-x: scroll;
   justify-content: center;
   align-items: center;
-  margin-top: 150px;
+  margin-top: 150px; */
+  /* margin-left: 100px;
+  margin-right: 100px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+  width: 100%;
+  border: 2px solid grey;
 }
 .song-container {
-  display: block;
-  white-space: nowrap;
+  /* display: block;
+  white-space: nowrap; */
+  width: 90%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 90%;
+  height: 50%;
+}
+.song-container::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  z-index: 99;
+  height: 100%;
+  width: 150px;
+  background-image: linear-gradient(90deg, black, transparent);
+}
+
+.song-container::after {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+  z-index: 99;
+  height: 100%;
+  width: 150px;
+  background-image: linear-gradient(-90deg, black, transparent);
+}
+
+.data-container {
+  /* display: inline-block;
+  margin-right: 10px; */
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  overflow: auto;
+  position: relative;
+  scroll-behavior: smooth;
 }
 
 .card {
-  display: inline-block;
-  margin-right: 10px;
+  min-width: 250px;
+  height: auto;
+  margin: 1px 10px;
+  cursor: pointer;
+  border: 1px solid white;
+  overflow: hidden;
+}
+.card::-webkit-scrollbar {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.card img {
+  width: 250px;
+  height: 250px;
 }
 
-.card img {
-  width: 150px;
-  height: 200px;
+.song-title {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(29, 106, 154, 0.72);
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+
+  transition: opacity 0.2s, visibility 0.2s;
 }
+
+.card:hover .song-title {
+  visibility: visible;
+  opacity: 1;
+}
+
 /* .card {
   min-width: 500px;
   height: 450px;

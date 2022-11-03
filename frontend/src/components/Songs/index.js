@@ -23,7 +23,13 @@ const GetAllSongs = () => {
       // };
       return (
         <div key={el.id} className="card" href={`/songs/${el.id}`}>
-          <img className="card-img" src={el.imageUrl} alt="no pic avail!"></img>
+          <div className="image">
+            <img
+              className="card-img"
+              src={el.imageUrl}
+              alt="no pic avail!"
+            ></img>
+          </div>
           <div className="song-title">
             <a href={`/songs/${el.id}`}>{el.title}</a>
           </div>
@@ -33,7 +39,21 @@ const GetAllSongs = () => {
   }
   return (
     <div className="wrapper">
-      <div className="song-container">{data}</div>
+      <button
+        className="icon"
+        onClick={() => {
+          document.querySelector(".data-container").scrollBy(-350, 0);
+        }}
+      ></button>
+      <div className="song-container">
+        <div className="data-container">{data}</div>
+      </div>
+      <button
+        className="icon"
+        onClick={() => {
+          document.querySelector(".data-container").scrollBy(350, 0);
+        }}
+      ></button>
     </div>
   );
 };

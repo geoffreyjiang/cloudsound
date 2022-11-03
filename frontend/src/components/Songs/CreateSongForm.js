@@ -32,7 +32,9 @@ const CreateSongForm = () => {
       description,
       userId: sessionUser.id,
     };
+    console.log(data);
     let newSong = await dispatch(createSong(data));
+    console.log(newSong);
     if (newSong) {
       history.push(`/songs`);
     }
