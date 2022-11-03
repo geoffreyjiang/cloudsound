@@ -14,13 +14,16 @@ const SongDetail = () => {
   const comments = useSelector((state) => Object.values(state.comments));
   // console.log(comments);
   // comments.forEach((el) => console.log(el));
+
   let allComments;
   if (comments) {
     allComments = comments.map((el) => {
+      let y;
+      !el.User ? (y = "admin") : (y = el.User.username);
       return (
         <div className="comments-section">
           <div>{el.body}</div>
-          <div>By: {el.userId}</div>
+          <div>By: {y}</div>
         </div>
       );
       // console.log(el);
@@ -39,7 +42,7 @@ const SongDetail = () => {
     load();
   }, [id, dispatch]);
   const details = song.map((el, i) => {
-    console.log(el);
+    // console.log(el);
 
     let uploadedBy;
     if (!el.Artist) {

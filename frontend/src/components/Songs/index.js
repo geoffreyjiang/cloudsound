@@ -13,7 +13,7 @@ const GetAllSongs = () => {
     };
     load();
   }, [dispatch]);
-  console.log(songs);
+  // console.log(songs);
   //   songs.forEach((el) => console.log(el.title));
   let data;
   if (songs) {
@@ -24,14 +24,18 @@ const GetAllSongs = () => {
       return (
         <div key={el.id} className="card" href={`/songs/${el.id}`}>
           <img className="card-img" src={el.imageUrl} alt="no pic avail!"></img>
-          <a className="song-title" href={`/songs/${el.id}`}>
-            {el.title}
-          </a>
+          <div className="song-title">
+            <a href={`/songs/${el.id}`}>{el.title}</a>
+          </div>
         </div>
       );
     });
   }
-  return <div className="wrap">{data}</div>;
+  return (
+    <div className="wrapper">
+      <div className="song-container">{data}</div>
+    </div>
+  );
 };
 
 export default GetAllSongs;

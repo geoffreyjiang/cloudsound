@@ -16,7 +16,7 @@ const CreateComment = () => {
       userId: user.id,
       songId: id,
       body,
-      user,
+      user: user.username,
     };
 
     let newComment = await dispatch(createComment(id, data));

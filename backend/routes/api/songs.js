@@ -29,7 +29,9 @@ router.post("/:id/comments", restoreUser, async (req, res) => {
     body,
     songId: id,
     userId: current.id,
+    user,
   });
+  // console.log(comment);
   res.json(comment);
 });
 
@@ -198,6 +200,7 @@ router.get("/", async (req, res) => {
 
   // const songs = await Song.findAll({ limit, offset });
   const songs = await Song.findAll();
+  console.log(songs);
 
   res.json(songs);
 });
