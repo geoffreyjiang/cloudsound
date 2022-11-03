@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { getAllSongs } from "../../store/songs";
 import { useDispatch, useSelector } from "react-redux";
 import "./Songs.css";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 const GetAllSongs = () => {
   const songs = useSelector((state) => Object.values(state.songs));
   const dispatch = useDispatch();
@@ -17,23 +17,26 @@ const GetAllSongs = () => {
   //   songs.forEach((el) => console.log(el.title));
   let data;
   if (songs) {
-    data = songs.map((el) => {
-      // const imgClick = () => {
-      //   `/songs/${el.id}`;
-      // };
+    data = songs.map((el, i) => {
+      let { id } = el;
       return (
-        <div key={el.id} className="card" href={`/songs/${el.id}`}>
-          <div className="image">
-            <img
-              className="card-img"
-              src={el.imageUrl}
-              alt="no pic avail!"
-            ></img>
+        <>
+          <div key={el.id} className="card">
+            <div key={i} className="image">
+              <img
+                className="card-img"
+                src={el.imageUrl}
+                alt="no pic avail!"
+                onClick={() => {
+                  history.push(`/songs/${id}`);
+                }}
+              ></img>
+              <div className="song-title">
+                <a href={`/songs/${id}`}>{el.title}</a>
+              </div>
+            </div>
           </div>
-          <div className="song-title">
-            <a href={`/songs/${el.id}`}>{el.title}</a>
-          </div>
-        </div>
+        </>
       );
     });
   }
@@ -44,7 +47,9 @@ const GetAllSongs = () => {
         onClick={() => {
           document.querySelector(".data-container").scrollBy(-350, 0);
         }}
-      ></button>
+      >
+        <i className="fa-solid fa-angles-left fa-3x" fa></i>
+      </button>
       <div className="song-container">
         <div className="data-container">{data}</div>
       </div>
@@ -53,7 +58,9 @@ const GetAllSongs = () => {
         onClick={() => {
           document.querySelector(".data-container").scrollBy(350, 0);
         }}
-      ></button>
+      >
+        <i className="fa-solid fa-angles-right fa-3x" fa></i>
+      </button>
     </div>
   );
 };
