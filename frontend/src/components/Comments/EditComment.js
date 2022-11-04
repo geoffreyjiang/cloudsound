@@ -1,13 +1,13 @@
 import { useParams, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editComment, getCommentId } from "../../store/comments";
+import { editComment } from "../../store/comments";
 // import { useHistory } from "react-router-dom";
 const EditComment = () => {
   const [body, setBody] = useState("");
   const { id } = useParams();
   const history = useHistory();
-  const user = useSelector((state) => state.session.user);
+  //   const user = useSelector((state) => state.session.user);
   const comment = useSelector((state) => state);
   console.log(comment);
   const dispatch = useDispatch();

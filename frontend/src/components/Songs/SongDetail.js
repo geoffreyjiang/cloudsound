@@ -10,6 +10,8 @@ const SongDetail = () => {
   const dispatch = useDispatch();
   // const songs = useSelector((state) => state);
   // console.log(id);
+  const user = useSelector((state) => state.session.user);
+
   const history = useHistory();
   const song = useSelector((state) => Object.values(state.songs));
   const comments = useSelector((state) => Object.values(state.comments));
@@ -18,9 +20,12 @@ const SongDetail = () => {
 
   let commentId;
   let allComments;
+
+  let userId;
+
   const deleteCommentBtn = () => {
     dispatch(deleteComment(commentId));
-    window.location.reload();
+    // window.location.reload();
   };
   if (comments) {
     allComments = comments.map((el) => {
@@ -40,7 +45,12 @@ const SongDetail = () => {
     history.push(`/songs/${id}/edit`);
   };
   const deleteBtn = () => {
-    dispatch(removeSong(id));
+    if (!user || user.id === userId) {
+      dispatch(removeSong(id));
+    } else {
+      alert("This is not your song!");
+    }
+
     history.push(`/songs/`);
   };
 
@@ -52,9 +62,11 @@ const SongDetail = () => {
     };
     load();
   }, [id, dispatch]);
+
+  // console.log(userId);
   const details = song.map((el, i) => {
     // console.log(el);
-
+    userId = el.userId;
     let uploadedBy;
     if (!el.Artist) {
       uploadedBy = "test";
