@@ -37,6 +37,7 @@ const CreateSongForm = () => {
     console.log(newSong);
     if (newSong) {
       history.push(`/songs`);
+      window.location.reload();
     }
   };
 

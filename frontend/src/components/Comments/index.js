@@ -24,6 +24,7 @@ const CreateComment = () => {
     if (newComment) {
       history.push(`/songs/${id}`);
     }
+    // window.location.reload();
   };
   return (
     <>

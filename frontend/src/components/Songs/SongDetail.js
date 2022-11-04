@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { songById, removeSong } from "../../store/songs";
 import { useSelector, useDispatch } from "react-redux";
-import { getComments } from "../../store/comments";
+import { getComments, deleteComment } from "../../store/comments";
 import CreateComment from "../Comments";
+import "./songDetail.css";
 const SongDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -15,24 +16,36 @@ const SongDetail = () => {
   // console.log(comments);
   // comments.forEach((el) => console.log(el));
 
+  let commentId;
   let allComments;
+  const deleteCommentBtn = () => {
+    dispatch(deleteComment(commentId));
+    window.location.reload();
+  };
   if (comments) {
     allComments = comments.map((el) => {
       let y;
+      commentId = el.id;
       !el.User ? (y = "admin") : (y = el.User.username);
       return (
         <div className="comments-section">
           <div>{el.body}</div>
           <div>By: {y}</div>
+          <button onClick={deleteCommentBtn}>Delete</button>;
         </div>
       );
+
       // console.log(el);
     });
   }
+  const editBtn = () => {
+    history.push(`/songs/${id}/edit`);
+  };
   const deleteBtn = () => {
     dispatch(removeSong(id));
     history.push(`/songs/`);
   };
+
   useEffect(() => {
     const load = async () => {
       dispatch(songById(id));
@@ -54,15 +67,26 @@ const SongDetail = () => {
       <>
         {/* console.log(el.Art; */}
         <div className="song-card">
-          <img src={el.imageUrl} alt="" height="100x" width="80x"></img>
-          <h1>Title:{el.title}</h1>
-          <h2>Upload By: {uploadedBy}</h2>
-          <h3>Description: {el.description}</h3>
-          {/* <div>Url:{el.url}</div> */}
+          <div className="song-img">
+            <img
+              className="detail-img"
+              src={el.imageUrl}
+              alt=""
+              height="100x"
+              width="80x"
+            ></img>
+          </div>
           <audio controls src={el.url}>
             <a href={el.url}>Link</a>
           </audio>
-          <Link to={`/songs/${el.id}/edit`}>Edit</Link>
+          {/* <div>Url:{el.url}</div> */}
+        </div>
+        <div className="song-info">
+          <h1>Title:{el.title}</h1>
+          <h2>Upload By: {uploadedBy}</h2>
+          <h3>Description: {el.description}</h3>
+          {/* <Link to={`/songs/${el.id}/edit`}>Edit</Link> */}
+          <button onClick={editBtn}>Edit</button>
           <button onClick={deleteBtn}>Delete</button>
         </div>
       </>
@@ -70,7 +94,9 @@ const SongDetail = () => {
   });
   return (
     <>
-      <div key={id}>{details}</div>
+      <div key={id} className="song-containerer">
+        {details}
+      </div>
       <br></br>
       <br></br>
       <br></br>

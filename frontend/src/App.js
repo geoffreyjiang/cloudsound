@@ -8,6 +8,8 @@ import GetAllSongs from "./components/Songs";
 import CreateSongForm from "./components/Songs/CreateSongForm";
 import SongDetail from "./components/Songs/SongDetail";
 import EditSong from "./components/Songs/EditSong";
+import HomePage from "./components/HomePage";
+// import EditComment from "./components/Comments/EditComment";
 import * as sessionActions from "./store/session";
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +23,9 @@ function App() {
       <Navigation isLoadecd={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route path exact="/">
+            <HomePage />
+          </Route>
           <Route path="/login">
             <LoginFormPage />
           </Route>
@@ -36,6 +41,9 @@ function App() {
           <Route path="/create">
             <CreateSongForm />
           </Route>
+          {/* <Route exact path="/comments/:id">
+            <EditComment />
+          </Route> */}
           <Route path="/songs">
             <GetAllSongs />
           </Route>

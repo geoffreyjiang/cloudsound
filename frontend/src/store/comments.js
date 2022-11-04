@@ -4,6 +4,7 @@ const GET = "comments/GET";
 const CREATE = "comments/CREATE";
 const DELETE = "comments/DELETE";
 const UPDATE = "comments/UPDATE";
+const GETID = "comments/GETID";
 const load = (comment) => {
   return {
     type: GET,
@@ -24,12 +25,27 @@ const remove = (id) => {
   };
 };
 
-const edit = (id) => {
+const edit = (comment) => {
   return {
     type: UPDATE,
-    id,
+    comment,
   };
 };
+const commentId = (comment) => ({
+  type: GETID,
+  comment,
+});
+
+export const getCommentId = (id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/comments/${id}`);
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(commentId(data));
+    return data;
+  }
+};
+
 export const getComments = (id) => async (dispatch) => {
   const res = await csrfFetch(`/api/songs/${id}/comments`);
   // console.log(res);
@@ -63,6 +79,18 @@ export const deleteComment = (id) => async (dispatch) => {
   }
 };
 
+export const editComment = (id, comment) => async (dispatch) => {
+  const res = await csrfFetch(`/api/comments/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(comment),
+  });
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(edit(data));
+  }
+  return res;
+};
+
 const commentReducer = (state = {}, action) => {
   // console.log(action);
   let newState = { ...state };
@@ -75,7 +103,9 @@ const commentReducer = (state = {}, action) => {
     case DELETE:
       delete newState[action.id];
       return newState;
-
+    case UPDATE:
+      newState = { ...state, [action.comment.id]: action.comment };
+      return newState;
     default:
       return state;
   }

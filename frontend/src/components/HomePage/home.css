@@ -1,0 +1,29 @@
+.home-img {
+  width: 100%;
+  height: auto;
+}
+
+.home-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.home-text h3 {
+  left: 50%;
+  top: 90%;
+  padding-left: 70px;
+}
+
+.home-text i {
+  left: 50%;
+  padding-left: 70px;
+}
+
+/* .browse-text {
+  padding-top: 5px;
+  justify-content: center;
+  display: flex;
+} */
