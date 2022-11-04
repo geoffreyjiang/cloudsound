@@ -31,11 +31,9 @@ const SongDetail = () => {
         <div className="comments-section">
           <div>{el.body}</div>
           <div>By: {y}</div>
-          <button onClick={deleteCommentBtn}>Delete</button>;
+          <button onClick={deleteCommentBtn}>Delete</button>
         </div>
       );
-
-      // console.log(el);
     });
   }
   const editBtn = () => {
