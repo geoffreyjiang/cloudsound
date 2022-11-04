@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createSong } from "../../store/songs";
 import { useHistory } from "react-router-dom";
@@ -10,13 +10,19 @@ const CreateSongForm = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
-  // const [errors, setErrors] = useState([]);
-  // const [disabled, setDisabled] = useState(false);
+  const [errors, setErrors] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
+
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getAllSongs());
-  // }, []);
+  useEffect(() => {
+    const err = [];
+    if (!title.length) err.push("Title required");
+    if (!url) err.push("Url required");
+    if (!description) err.push("Description required");
+    if (!imageUrl) err.push("Image url required");
+    setErrors(err);
+  }, [title, url, description, imageUrl]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +30,7 @@ const CreateSongForm = () => {
     // console.log(imageUrl, "img");
     // console.log(url, "url");
     // console.log(description, "description");
+    setSubmitted(true);
 
     const data = {
       title,
@@ -33,8 +40,12 @@ const CreateSongForm = () => {
       userId: sessionUser.id,
     };
     console.log(data);
+    // if (data && data.errors) setErrors(data.errors);
     let newSong = await dispatch(createSong(data));
+    setSubmitted(false);
+
     console.log(newSong);
+
     if (newSong) {
       history.push(`/songs`);
       window.location.reload();
@@ -45,6 +56,15 @@ const CreateSongForm = () => {
     <>
       <div className="create-form">
         <form onSubmit={handleSubmit}>
+          {submitted && errors.length > 0 && (
+            <div>
+              <ul>
+                {errors.map((err) => (
+                  <li key={err}>{err}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <div className="create-input">
             <label>Title</label>
             <input

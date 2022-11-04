@@ -42,6 +42,11 @@ const SongDetail = () => {
     });
   }
   const editBtn = () => {
+    if (!user || user.id === userId) {
+      history.push(`/songs/${id}/edit`);
+    } else {
+      alert("This is not your song!");
+    }
     history.push(`/songs/${id}/edit`);
   };
   const deleteBtn = () => {
