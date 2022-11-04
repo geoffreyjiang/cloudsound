@@ -31,7 +31,9 @@ const CreateSongForm = () => {
     // console.log(url, "url");
     // console.log(description, "description");
     setSubmitted(true);
-
+    if (!sessionUser) {
+      alert("User must be logged in!");
+    }
     const data = {
       title,
       imageUrl,
