@@ -20,15 +20,29 @@ const SongDetail = () => {
 
   let commentId;
   let allComments;
-
+  let commentUserId;
   let userId;
-
+  // console.log(commentUserId);
+  // console.log(user.id);
   const deleteCommentBtn = () => {
+    // if (!user || user.id === commentUserId) {
+    //   dispatch(deleteComment(commentId));
+    // } else {
+    //   alert("this is not your comment!");
+    // }
     dispatch(deleteComment(commentId));
-    // window.location.reload();
+    window.location.reload();
   };
   if (comments) {
     allComments = comments.map((el) => {
+      console.log(el);
+      // const del = () => {
+      //   if (el.User.id === user.id) {
+      //     // commentUserId = el.User.id;
+      //     return <button onClick={deleteCommentBtn}>Delete</button>;
+      //   }
+      // };
+      // commentUserId = el.User.id;
       let y;
       commentId = el.id;
       !el.User ? (y = "admin") : (y = el.User.username);
@@ -37,6 +51,7 @@ const SongDetail = () => {
           <div>{el.body}</div>
           <div>By: {y}</div>
           <button onClick={deleteCommentBtn}>Delete</button>
+          {/* {del} */}
         </div>
       );
     });

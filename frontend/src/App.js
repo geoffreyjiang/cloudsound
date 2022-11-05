@@ -23,7 +23,7 @@ function App() {
       <Navigation isLoadecd={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path exact="/">
+          <Route exact path="/">
             <HomePage />
           </Route>
           <Route path="/login">

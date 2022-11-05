@@ -19,7 +19,7 @@ const HomePage = () => {
           <h3>A SoundCloud Clone</h3>
 
           <a href={`/songs`}>
-            <i class="fa-solid fa-circle-play fa-6x"></i>
+            <i className="fa-solid fa-circle-play fa-6x"></i>
           </a>
         </div>
       </div>
