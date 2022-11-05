@@ -10,6 +10,7 @@ const CreateComment = () => {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const handleSubmit = async (e) => {
+    window.location.reload();
     e.preventDefault();
 
     const data = {
@@ -24,7 +25,6 @@ const CreateComment = () => {
     if (newComment) {
       history.push(`/songs/${id}`);
     }
-    // window.location.reload();
   };
   return (
     <>
