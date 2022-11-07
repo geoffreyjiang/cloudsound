@@ -14,9 +14,7 @@ const CreateComment = () => {
     if (!user) {
       alert("Please login!");
     }
-    if (!body) {
-      alert("Comment cannot be empty!");
-    }
+
     window.location.reload();
     const data = {
       userId: user.id,
@@ -25,7 +23,9 @@ const CreateComment = () => {
       user: user.username,
     };
 
-    let newComment = await dispatch(createComment(id, data));
+    if (!body) {
+      alert("Comment cannot be empty!");
+    } else await dispatch(createComment(id, data));
     setBody("");
     // if (newComment) {
     //   window.location.reload();
