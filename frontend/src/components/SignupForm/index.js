@@ -24,7 +24,7 @@ function SignupFormPage() {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return (history.push("/songs"),
+      (history.push("/songs"),
       dispatch(
         sessionActions.signup({
           email,

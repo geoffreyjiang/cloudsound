@@ -67,6 +67,7 @@ const CreateSongForm = () => {
               </ul>
             </div>
           )}
+          <h2>Upload A Song</h2>
           <div className="create-input">
             <label>Title</label>
             <input
@@ -77,7 +78,7 @@ const CreateSongForm = () => {
             ></input>
           </div>
           <div className="create-input">
-            <label>Upload Image</label>
+            <label>Image Url</label>
             <input
               type="input"
               name="image"
@@ -87,7 +88,7 @@ const CreateSongForm = () => {
           </div>
 
           <div className="create-input">
-            <label>Upload Song</label>
+            <label>Song Url</label>
             <input
               type="input"
               name="song"

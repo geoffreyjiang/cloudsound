@@ -30,9 +30,13 @@ function Navigation({ isLoaded }) {
         </span>
         <div className="nav-links"></div>
         {/* <a href="artists">Artists</a> */}
-        <a href="/songs">Songs</a>
+        <a href="/songs">
+          <i class="fa-solid fa-headphones"></i>
+        </a>
         {/* <a href="/albums">Albums</a> */}
-        <a href="/create">Upload</a>
+        <a href="/create">
+          <i class="fa-solid fa-upload"></i>
+        </a>
         {sessionLinks}
       </nav>
     </>
