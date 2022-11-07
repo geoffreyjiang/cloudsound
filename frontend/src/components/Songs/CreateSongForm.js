@@ -18,9 +18,9 @@ const CreateSongForm = () => {
   useEffect(() => {
     const err = [];
     if (!title.length) err.push("Title required");
-    if (!url) err.push("Url required");
+    if (!url.length) err.push("Url required");
     if (!description) err.push("Description required");
-    if (!imageUrl) err.push("Image url required");
+    if (!imageUrl.length) err.push("Image url required");
 
     setErrors(err);
   }, [title, url, description, imageUrl]);
@@ -81,29 +81,6 @@ const CreateSongForm = () => {
             ></input>
           </div>
           <div className="create-input">
-            <label>Image Url</label>
-            <input
-              type="input"
-              name="image"
-              value={imageUrl}
-              title="Please enter a valid image url ('https://...')"
-              onChange={(e) => setImageUrl(e.target.value)}
-              pattern="https://.*"
-            ></input>
-          </div>
-
-          <div className="create-input">
-            <label>Song Url</label>
-            <input
-              type="input"
-              name="song"
-              value={url}
-              title="Please enter a valid song url ('https://...')"
-              pattern="https://.*"
-              onChange={(e) => setUrl(e.target.value)}
-            ></input>
-          </div>
-          <div className="create-input">
             <label>Description</label>
             <textarea
               type="text"
@@ -113,6 +90,30 @@ const CreateSongForm = () => {
             ></textarea>
           </div>
           <div>
+            <div className="create-input">
+              <label>Image Url</label>
+              <input
+                type="input"
+                name="image"
+                value={imageUrl}
+                title="Please enter a valid image url ('https://...')"
+                onChange={(e) => setImageUrl(e.target.value)}
+                pattern="https://.*"
+              ></input>
+            </div>
+
+            <div className="create-input">
+              <label>Song Url</label>
+              <input
+                type="input"
+                name="song"
+                value={url}
+                title="Please enter a valid song url ('https://...')"
+                pattern="https://.*"
+                onChange={(e) => setUrl(e.target.value)}
+              ></input>
+            </div>
+
             <button className="submitBtn" type="submit">
               Upload Song
             </button>
