@@ -10,11 +10,14 @@ const CreateComment = () => {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const handleSubmit = async (e) => {
-    window.location.reload();
     e.preventDefault();
     if (!user) {
       alert("Please login!");
     }
+    if (!body) {
+      alert("Comment cannot be empty!");
+    }
+    window.location.reload();
     const data = {
       userId: user.id,
       songId: id,

@@ -43,16 +43,7 @@ const SongDetail = () => {
       commentId = el.id;
       !el.User ? (y = "anon") : (y = el.User.username);
 
-      if (el.User.id === user.id) {
-        // commentUserId = el.User.id;
-        return (
-          <div className="comments-section">
-            <div>{el.body}</div>
-            <div>By: {y}</div>
-            <button onClick={deleteCommentBtn}>Delete</button>
-          </div>
-        );
-      } else
+      if (!user) {
         return (
           <div className="comments-section">
             <div>{el.body}</div>
@@ -60,24 +51,41 @@ const SongDetail = () => {
             {/* <button onClick={deleteCommentBtn}>Delete</button> */}
           </div>
         );
+      } else if (el.User.id !== user.id) {
+        return (
+          <div className="comments-section">
+            <div>{el.body}</div>
+            <div>By: {y}</div>
+            {/* <button onClick={deleteCommentBtn}>Delete</button> */}
+          </div>
+        );
+        // commentUserId = el.User.id;
+      } else {
+        return (
+          <div className="comments-section">
+            <div>{el.body}</div>
+            <div>By: {y}</div>
+            <button onClick={deleteCommentBtn}>Delete</button>
+          </div>
+        );
+      }
     });
   }
   const editBtn = () => {
-    if (!user || user.id === userId) {
-      history.push(`/songs/${id}/edit`);
-    } else {
+    if (!user || user.id !== userId) {
       alert("This is not your song!");
+    } else if (user.id !== userId) {
+      history.push(`/songs/${id}/edit`);
     }
     // history.push(`/songs/${id}/edit`);
   };
   const deleteBtn = () => {
-    if (!user || user.id === userId) {
-      dispatch(removeSong(id));
-    } else {
+    if (!user || user.id !== userId) {
       alert("This is not your song!");
+    } else if (user.id !== userId) {
+      dispatch(removeSong(id));
+      history.push(`/songs/`);
     }
-
-    history.push(`/songs/`);
   };
 
   useEffect(() => {
@@ -116,10 +124,16 @@ const SongDetail = () => {
           {/* <div>Url:{el.url}</div> */}
         </div>
         <div className="song-info">
-          <h1>Title:{el.title}</h1>
-          <h2>Upload By: {uploadedBy}</h2>
+          <label className="detail-label">
+            Title <h2>{el.title}</h2>
+          </label>
+          <label className="detail-label">
+            Uploaded By <h2>{uploadedBy}</h2>
+          </label>
+          <label className="detail-label">
+            Description<h2>{el.description}</h2>
+          </label>
 
-          <h3>Description: {el.description}</h3>
           {/* <Link to={`/songs/${el.id}/edit`}>Edit</Link> */}
           <button onClick={editBtn}>Edit</button>
           <button onClick={deleteBtn}>Delete</button>
