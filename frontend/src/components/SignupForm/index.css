@@ -9,7 +9,8 @@ label {
   display: block;
   padding: 1rem 0 0.25rem;
   text-transform: u;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 input,
@@ -24,12 +25,14 @@ textarea {
 
 .submit-btn {
   border: 0;
-  background: burlywood;
+  background: white;
   padding: 0.5rem;
-  color: white;
+  color: black;
   text-transform: uppercase;
   cursor: pointer;
   width: auto;
+  /* justify-content: center;
+  display: flex; */
 }
 .create-form {
   max-width: 500px;
