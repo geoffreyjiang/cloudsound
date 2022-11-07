@@ -1,8 +1,10 @@
 .navBar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  background: orange;
+  /* background: #206ca0; */
+  background-color: transparent;
+
   height: 60px;
 }
 
@@ -33,4 +35,8 @@ ul {
 
 .nav-links > a :hover {
   opacity: 3;
+}
+
+.nav-btn {
+  color: white;
 }

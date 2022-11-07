@@ -11,10 +11,15 @@ function Navigation({ isLoaded }) {
     sessionLinks = <ProfileButton user={sessionUser} />;
   } else {
     sessionLinks = (
-      <span>
-        <NavLink to="/signup">Sign Up</NavLink>
-        {" || "}
-        <NavLink to="/login">Log In</NavLink>
+      <span className="nav-btn">
+        <NavLink className="nav-btn" to="/signup">
+          Sign Up
+        </NavLink>
+        {"  |  "}
+
+        <NavLink className="nav-btn" to="/login">
+          Log In
+        </NavLink>
       </span>
     );
   }
@@ -31,11 +36,11 @@ function Navigation({ isLoaded }) {
         <div className="nav-links"></div>
         {/* <a href="artists">Artists</a> */}
         <a href="/songs">
-          <i className="fa-solid fa-headphones"></i>
+          <i className="fa-solid fa-headphones fa-2x nav-btn"></i>
         </a>
         {/* <a href="/albums">Albums</a> */}
         <a href="/create">
-          <i className="fa-solid fa-upload"></i>
+          <i className="fa-solid fa-upload fa-2x nav-btn"></i>
         </a>
         {sessionLinks}
       </nav>

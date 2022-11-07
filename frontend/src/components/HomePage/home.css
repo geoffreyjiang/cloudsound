@@ -1,9 +1,11 @@
 .home-img {
-  width: 100%;
-  height: auto;
+  width: 350px;
+  height: 350px;
+  display: flex;
+  justify-content: center;
 }
 
-.home-text {
+/* .home-text {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -20,10 +22,43 @@
 .home-text i {
   left: 50%;
   padding-left: 70px;
-}
+} */
 
 /* .browse-text {
   padding-top: 5px;
   justify-content: center;
   display: flex;
 } */
+
+.home-text {
+  /* position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); */
+  justify-content: center;
+  display: flex;
+  text-decoration: none;
+  color: white;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+.cloud {
+  padding-top: 100px;
+  display: flex;
+  color: white;
+  justify-content: center;
+  padding-bottom: 75px;
+  padding-left: 20px;
+}
+.music {
+  padding-top: 75px;
+  color: white;
+  justify-content: center;
+  padding-left: 20px;
+  display: flex;
+  /* display: ; */
+}
+
+.play-btn {
+  padding: 20px;
+}

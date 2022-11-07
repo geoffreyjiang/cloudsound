@@ -7,14 +7,7 @@ import "./Songs.css";
 const GetAllSongs = () => {
   const songs = useSelector((state) => Object.values(state.songs));
   const dispatch = useDispatch();
-  // const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [url, setUrl] = useState(
-  //   "https://s3.console.aws.amazon.com/s3/object/cloudsound-audio?region=us-west-1&prefix=02+Crunch+Time.mp3"
-  // );
-  // const [img, setImg] = useState("");
-  // const [visible, setVisible] = useState(false);
-  // const history = useHistory();
+
   useEffect(() => {
     const load = async () => {
       dispatch(getAllSongs());
@@ -66,7 +59,7 @@ const GetAllSongs = () => {
     <>
       {/* <h1>Browse New Music</h1> */}
       <div className="browse-text">
-        <h2>Browse New Music</h2>
+        <h2>Browse Music</h2>
       </div>
       <div className="wrapper">
         <button
@@ -75,7 +68,7 @@ const GetAllSongs = () => {
             document.querySelector(".data-container").scrollBy(-350, 0);
           }}
         >
-          <i className="fa-solid fa-angles-left fa-3x" fa></i>
+          <i className="fa-solid fa-angles-left fa-3x arrows" fa></i>
         </button>
         <div className="song-container">
           <div className="data-container">{data}</div>
@@ -86,7 +79,7 @@ const GetAllSongs = () => {
             document.querySelector(".data-container").scrollBy(350, 0);
           }}
         >
-          <i className="fa-solid fa-angles-right fa-3x" fa></i>
+          <i className="fa-solid fa-angles-right fa-3x arrows" fa></i>
         </button>
       </div>
     </>
