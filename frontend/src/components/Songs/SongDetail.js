@@ -74,7 +74,7 @@ const SongDetail = () => {
   const editBtn = () => {
     if (!user || user.id !== userId) {
       alert("This is not your song!");
-    } else if (user.id !== userId) {
+    } else if (user.id === userId) {
       history.push(`/songs/${id}/edit`);
     }
     // history.push(`/songs/${id}/edit`);
@@ -82,7 +82,7 @@ const SongDetail = () => {
   const deleteBtn = () => {
     if (!user || user.id !== userId) {
       alert("This is not your song!");
-    } else if (user.id !== userId) {
+    } else if (user.id === userId) {
       dispatch(removeSong(id));
       history.push(`/songs/`);
     }
@@ -109,7 +109,6 @@ const SongDetail = () => {
     }
     return (
       <>
-        {/* console.log(el.Art; */}
         <div className="song-card">
           <div className="song-img">
             <img
