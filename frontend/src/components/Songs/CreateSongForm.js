@@ -86,7 +86,7 @@ const CreateSongForm = () => {
               type="input"
               name="image"
               value={imageUrl}
-              title="Please enter a valid image url"
+              title="Please enter a valid image url ('https://...')"
               onChange={(e) => setImageUrl(e.target.value)}
               pattern="https://.*"
             ></input>
@@ -98,7 +98,7 @@ const CreateSongForm = () => {
               type="input"
               name="song"
               value={url}
-              title="Please enter a valid song url"
+              title="Please enter a valid song url ('https://...')"
               pattern="https://.*"
               onChange={(e) => setUrl(e.target.value)}
             ></input>
