@@ -24,9 +24,9 @@ const CreateComment = () => {
 
     let newComment = await dispatch(createComment(id, data));
     setBody("");
-    if (newComment) {
-      window.location.reload();
-    }
+    // if (newComment) {
+    //   window.location.reload();
+    // }
   };
   return (
     <>

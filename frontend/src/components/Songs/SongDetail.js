@@ -24,6 +24,7 @@ const SongDetail = () => {
   let userId;
   // console.log(commentUserId);
   // console.log(user.id);
+  let delBtn;
   const deleteCommentBtn = () => {
     // if (!user || user.id === commentUserId) {
     //   dispatch(deleteComment(commentId));
@@ -36,24 +37,29 @@ const SongDetail = () => {
   if (comments) {
     allComments = comments.map((el) => {
       console.log(el);
-      // const del = () => {
-      //   if (el.User.id === user.id) {
-      //     // commentUserId = el.User.id;
-      //     return <button onClick={deleteCommentBtn}>Delete</button>;
-      //   }
-      // };
+
       // commentUserId = el.User.id;
       let y;
       commentId = el.id;
-      !el.User ? (y = "admin") : (y = el.User.username);
-      return (
-        <div className="comments-section">
-          <div>{el.body}</div>
-          <div>By: {y}</div>
-          <button onClick={deleteCommentBtn}>Delete</button>
-          {/* {del} */}
-        </div>
-      );
+      !el.User ? (y = "anon") : (y = el.User.username);
+
+      if (el.User.id === user.id) {
+        // commentUserId = el.User.id;
+        return (
+          <div className="comments-section">
+            <div>{el.body}</div>
+            <div>By: {y}</div>
+            <button onClick={deleteCommentBtn}>Delete</button>
+          </div>
+        );
+      } else
+        return (
+          <div className="comments-section">
+            <div>{el.body}</div>
+            <div>By: {y}</div>
+            {/* <button onClick={deleteCommentBtn}>Delete</button> */}
+          </div>
+        );
     });
   }
   const editBtn = () => {
