@@ -26,11 +26,6 @@ const SongDetail = () => {
   // console.log(user.id);
   let delBtn;
   const deleteCommentBtn = () => {
-    // if (!user || user.id === commentUserId) {
-    //   dispatch(deleteComment(commentId));
-    // } else {
-    //   alert("this is not your comment!");
-    // }
     dispatch(deleteComment(commentId));
     window.location.reload();
   };
@@ -48,7 +43,6 @@ const SongDetail = () => {
           <div className="comments-section">
             <div>{el.body}</div>
             <div>By: {y}</div>
-            {/* <button onClick={deleteCommentBtn}>Delete</button> */}
           </div>
         );
       } else if (el.User.id !== user.id) {
@@ -56,10 +50,8 @@ const SongDetail = () => {
           <div className="comments-section">
             <div>{el.body}</div>
             <div>By: {y}</div>
-            {/* <button onClick={deleteCommentBtn}>Delete</button> */}
           </div>
         );
-        // commentUserId = el.User.id;
       } else {
         return (
           <div className="comments-section">
@@ -119,26 +111,25 @@ const SongDetail = () => {
               width="80x"
             ></img>
           </div>
+          <div className="song-info">
+            <label className="detail-label">
+              Title <h2>{el.title}</h2>
+            </label>
+            <label className="detail-label">
+              Uploaded By <h2>{uploadedBy}</h2>
+            </label>
+            <label className="detail-label">
+              Description<h2>{el.description}</h2>
+            </label>
 
+            {/* <Link to={`/songs/${el.id}/edit`}>Edit</Link> */}
+            <button onClick={editBtn}>Edit</button>
+            <button onClick={deleteBtn}>Delete</button>
+            <audio controls src={el.url}>
+              <a href={el.url}>Link</a>
+            </audio>
+          </div>
           {/* <div>Url:{el.url}</div> */}
-        </div>
-        <div className="song-info">
-          <label className="detail-label">
-            Title <h2>{el.title}</h2>
-          </label>
-          <label className="detail-label">
-            Uploaded By <h2>{uploadedBy}</h2>
-          </label>
-          <label className="detail-label">
-            Description<h2>{el.description}</h2>
-          </label>
-
-          {/* <Link to={`/songs/${el.id}/edit`}>Edit</Link> */}
-          <button onClick={editBtn}>Edit</button>
-          <button onClick={deleteBtn}>Delete</button>
-          <audio controls src={el.url}>
-            <a href={el.url}>Link</a>
-          </audio>
         </div>
       </>
     );

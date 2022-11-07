@@ -10,7 +10,7 @@
 }
 
 body {
-  background-color: grey;
+  background-color: black;
 }
 h2 {
   display: flex;
@@ -31,7 +31,7 @@ h2 {
   justify-content: center;
   height: 100vh;
   width: 100%;
-  border: 2px solid grey;
+  /* border: 2px solid grey; */
   padding-bottom: 180px;
 }
 .song-container {
@@ -52,7 +52,7 @@ h2 {
   z-index: 99;
   height: 100%;
   width: 150px;
-  background-image: linear-gradient(90deg, grey, transparent);
+  background-image: linear-gradient(90deg, white, transparent);
 }
 
 .song-container::after {
@@ -63,7 +63,7 @@ h2 {
   z-index: 99;
   height: 100%;
   width: 150px;
-  background-image: linear-gradient(-90deg, grey, transparent);
+  background-image: linear-gradient(-90deg, white, transparent);
 }
 
 .data-container {
@@ -123,16 +123,23 @@ a {
   position: absolute;
   bottom: 0;
   padding-bottom: 50%;
+  color: whitesmoke;
+  font-weight: 300;
+  text-transform: capitalize;
+  font-family: "Courier New", Courier, monospace;
 }
-.card:hover {
-  background: rgba(0, 0, 0, 0, 0.6);
-}
+
 .card:hover .song-title {
   visibility: visible;
   opacity: 1;
-  background: rgba(0, 0, 0, 0, 0.6);
+  /* background: black; */
 }
 
+.song-btn {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
 /* .card {
   min-width: 500px;
   height: 450px;

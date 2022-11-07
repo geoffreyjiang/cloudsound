@@ -49,8 +49,6 @@ const CreateSongForm = () => {
     let newSong = await dispatch(createSong(data));
     setSubmitted(false);
 
-    console.log(newSong);
-
     if (newSong) {
       history.push(`/songs`);
       window.location.reload();

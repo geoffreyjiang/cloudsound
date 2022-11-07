@@ -31,11 +31,11 @@ function Navigation({ isLoaded }) {
         <div className="nav-links"></div>
         {/* <a href="artists">Artists</a> */}
         <a href="/songs">
-          <i class="fa-solid fa-headphones"></i>
+          <i className="fa-solid fa-headphones"></i>
         </a>
         {/* <a href="/albums">Albums</a> */}
         <a href="/create">
-          <i class="fa-solid fa-upload"></i>
+          <i className="fa-solid fa-upload"></i>
         </a>
         {sessionLinks}
       </nav>

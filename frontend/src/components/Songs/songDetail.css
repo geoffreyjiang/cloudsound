@@ -9,6 +9,10 @@ body {
   min-height: 100vh;
 } */
 
+body {
+  background: white;
+}
+
 .song-containerer {
   border: 1px solid black;
   display: flex;
@@ -55,8 +59,10 @@ section {
 } */
 
 .song-info {
-  width: 50%;
-  /* justify-content: center !important; */
+  width: 500px;
+  background: whitesmoke;
+  justify-content: center;
+  align-items: center;
 }
 
 .detail-label {
