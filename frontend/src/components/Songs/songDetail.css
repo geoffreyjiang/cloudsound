@@ -43,6 +43,11 @@ audio {
   /* height: 500%; */
 }
 
+section {
+  width: 100%;
+  justify-content: center;
+}
+
 /* .song-info {
   display: flex;
   justify-content: center;

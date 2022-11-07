@@ -1,14 +1,13 @@
 label {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
+  display: block;
+  padding: 1rem 0 0.25rem;
+  text-transform: u;
+  font-size: 14px;
 }
 
-form {
-  display: flex;
-  align-items: center;
-  align-content: flex-start;
-  justify-content: center;
-  flex-direction: column;
+.login-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  border: 1px solid;
+  padding: 2rem;
 }

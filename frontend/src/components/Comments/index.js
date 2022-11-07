@@ -12,7 +12,9 @@ const CreateComment = () => {
   const handleSubmit = async (e) => {
     window.location.reload();
     e.preventDefault();
-
+    if (!user) {
+      alert("Please login!");
+    }
     const data = {
       userId: user.id,
       songId: id,
@@ -23,13 +25,14 @@ const CreateComment = () => {
     let newComment = await dispatch(createComment(id, data));
     setBody("");
     if (newComment) {
-      history.push(`/songs/${id}`);
+      window.location.reload();
     }
   };
   return (
     <>
-      <div className="create-form">
+      <div>
         <form onSubmit={handleSubmit}>
+          {/* <h1>Comment</h1> */}
           <div className="create-input">
             <textarea
               type="text"

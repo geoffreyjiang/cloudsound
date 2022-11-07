@@ -52,13 +52,13 @@ const EditSong = () => {
     // dispatch(updateSong());
   }, [dispatch, id]);
 
-  if (!user || user.id !== userId) {
-    return (
-      <div>
-        <div> This is not your song!</div>
-      </div>
-    );
-  }
+  // if (!user || user.id !== userId) {
+  //   return (
+  //     <div>
+  //       <div> This is not your song!</div>
+  //     </div>
+  //   );
+  // }
   const handleSubmit = async (e) => {
     e.preventDefault();
 

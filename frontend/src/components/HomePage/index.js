@@ -16,7 +16,6 @@ const HomePage = () => {
         ></img>
         <div className="home-text">
           <h1>Welcome to CloudSound! </h1>
-          <h3>A SoundCloud Clone</h3>
 
           <a href={`/songs`}>
             <i className="fa-solid fa-circle-play fa-6x"></i>

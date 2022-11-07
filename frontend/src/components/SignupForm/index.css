@@ -1,0 +1,47 @@
+.signup-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  border: 1px solid;
+  padding: 2rem;
+}
+
+label {
+  display: block;
+  padding: 1rem 0 0.25rem;
+  text-transform: u;
+  font-size: 14px;
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.submit-btn {
+  border: 0;
+  background: burlywood;
+  padding: 0.5rem;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: auto;
+}
+.create-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  border: 1px solid;
+  padding: 2rem;
+}
+
+.comment-section {
+  max-width: 500px;
+  margin: 2rem auto;
+  border: 1px solid;
+  padding: 2rem;
+  background: white;
+}

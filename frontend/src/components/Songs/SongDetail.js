@@ -62,7 +62,7 @@ const SongDetail = () => {
     } else {
       alert("This is not your song!");
     }
-    history.push(`/songs/${id}/edit`);
+    // history.push(`/songs/${id}/edit`);
   };
   const deleteBtn = () => {
     if (!user || user.id === userId) {
@@ -129,8 +129,8 @@ const SongDetail = () => {
       <div key={id} className="song-containerer">
         {details}
       </div>
-      <section>
-        <h1 className="comments-section">Comments</h1>
+      <section className="comment-section">
+        <h1>Comments</h1>
         {allComments}
 
         <br></br>

@@ -56,8 +56,8 @@ const CreateSongForm = () => {
 
   return (
     <>
-      <div className="create-form">
-        <form onSubmit={handleSubmit}>
+      <div>
+        <form className="create-form" onSubmit={handleSubmit}>
           {submitted && errors.length > 0 && (
             <div>
               <ul>
