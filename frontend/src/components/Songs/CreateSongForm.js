@@ -21,6 +21,7 @@ const CreateSongForm = () => {
     if (!url) err.push("Url required");
     if (!description) err.push("Description required");
     if (!imageUrl) err.push("Image url required");
+
     setErrors(err);
   }, [title, url, description, imageUrl]);
 
@@ -30,6 +31,8 @@ const CreateSongForm = () => {
     // console.log(imageUrl, "img");
     // console.log(url, "url");
     // console.log(description, "description");
+    if (!imageUrl.startsWith("https://")) alert("Invalid image url!");
+    // if (!url.startsWith("https://")) alert("Invalid song url!");
     setSubmitted(true);
     if (!sessionUser) {
       alert("User must be logged in!");
@@ -41,7 +44,7 @@ const CreateSongForm = () => {
       description,
       userId: sessionUser.id,
     };
-    console.log(data);
+    // console.log(data);
     // if (data && data.errors) setErrors(data.errors);
     let newSong = await dispatch(createSong(data));
     setSubmitted(false);
@@ -83,7 +86,9 @@ const CreateSongForm = () => {
               type="input"
               name="image"
               value={imageUrl}
+              title="Please enter a valid image url"
               onChange={(e) => setImageUrl(e.target.value)}
+              pattern="https://.*"
             ></input>
           </div>
 
@@ -93,6 +98,8 @@ const CreateSongForm = () => {
               type="input"
               name="song"
               value={url}
+              title="Please enter a valid song url"
+              pattern="https://.*"
               onChange={(e) => setUrl(e.target.value)}
             ></input>
           </div>
