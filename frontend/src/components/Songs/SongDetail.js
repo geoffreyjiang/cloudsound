@@ -106,18 +106,20 @@ const SongDetail = () => {
               width="80x"
             ></img>
           </div>
-          <audio controls src={el.url}>
-            <a href={el.url}>Link</a>
-          </audio>
+
           {/* <div>Url:{el.url}</div> */}
         </div>
         <div className="song-info">
           <h1>Title:{el.title}</h1>
           <h2>Upload By: {uploadedBy}</h2>
+
           <h3>Description: {el.description}</h3>
           {/* <Link to={`/songs/${el.id}/edit`}>Edit</Link> */}
           <button onClick={editBtn}>Edit</button>
           <button onClick={deleteBtn}>Delete</button>
+          <audio controls src={el.url}>
+            <a href={el.url}>Link</a>
+          </audio>
         </div>
       </>
     );
@@ -127,14 +129,18 @@ const SongDetail = () => {
       <div key={id} className="song-containerer">
         {details}
       </div>
-      <br></br>
-      <br></br>
-      <br></br>
       <section>
         <h1 className="comments-section">Comments</h1>
         {allComments}
+
+        <br></br>
+        <br></br>
+        <h2>Leave a comment</h2>
+        <CreateComment />
       </section>
-      <CreateComment />
+      <br></br>
+      <br></br>
+      <br></br>
     </>
   );
 };
