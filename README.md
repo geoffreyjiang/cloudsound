@@ -1,4 +1,30 @@
-# `cloudSound`
+# `CloudSound`
+
+## Introduction
+
+Cloudsound is a full stack application that allows users to connect through music. Users can create their own music links by uploading their own music and song urls. Each song can be commented on allowing users to connect!
+
+![alt text](./frontend/assets/pics/pic.png)
+
+## Technologies Used
+
+- Node
+- Express
+- React
+- Redux
+- Sequelize
+
+## Instructions
+
+- Install npm packages in frontend/backend folders
+- Make .env file
+- Migrate and seed with sequelize
+- npm start
+
+## Snippet
+
+Some code I wrote to render the music saved to the back end!
+![alt text](./frontend/assets/pics/Screen%20Shot%202022-11-07%20at%203.09.41%20PM.png)
 
 ## Database Schema Design
 

@@ -1,9 +1,9 @@
 import { csrfFetch } from "./csrf";
+const LOAD = "/songs/load";
 const ADD = "/songs/addSong";
 const DELETE = "/songs/deleteSong";
 const UPDATE = "/songs/updateSong";
 const GetSongById = "/songs/songId";
-const LOAD = "/songs/load";
 
 const editSong = (song) => ({
   type: UPDATE,
@@ -30,7 +30,6 @@ const songId = (song) => ({
 });
 
 export const songById = (id) => async (dispatch) => {
-  // console.log(id, "SONGBYID");
   const res = await csrfFetch(`/api/songs/${id}`);
 
   // console.log(res, "SONGBYID");
@@ -42,8 +41,6 @@ export const songById = (id) => async (dispatch) => {
 };
 
 export const updateSong = (id, song) => async (dispatch) => {
-  // console.log(id, "updateID");
-  // console.log(song, "updateSong");
   const res = await csrfFetch(`/api/songs/${id}`, {
     method: "PUT",
     body: JSON.stringify(song),
