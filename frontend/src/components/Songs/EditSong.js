@@ -7,7 +7,7 @@ const EditSong = () => {
   const user = useSelector((state) => state.session.user);
   const song = useSelector((state) => Object.values(state.songs));
   const history = useHistory();
-  console.log(user.id);
+  // console.log(user.id);
   let userId;
   let t;
   let i;
@@ -19,6 +19,7 @@ const EditSong = () => {
     t = el.title;
     u = el.url;
     d = el.description;
+    i = el.imageUrl;
   });
   console.log(userId);
   const { id } = useParams();
@@ -70,7 +71,7 @@ const EditSong = () => {
     };
     let newSong = await dispatch(updateSong(id, data));
     if (newSong) {
-      history.push(`/songs`);
+      history.push(`/songs/${id}`);
     }
   };
 
