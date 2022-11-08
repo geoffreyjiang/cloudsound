@@ -28,7 +28,6 @@ function Navigation({ isLoaded }) {
         {" | "}
         <button
           onClick={async (e) => {
-            e.preventDefault();
             const credential = "Demo-lition";
             const password = "password";
             history.push("/");

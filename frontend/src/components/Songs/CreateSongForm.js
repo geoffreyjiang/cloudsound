@@ -75,6 +75,7 @@ const CreateSongForm = () => {
               type="text"
               name="title"
               value={title}
+              required
               onChange={(e) => setTitle(e.target.value)}
             ></input>
           </div>
@@ -83,6 +84,7 @@ const CreateSongForm = () => {
             <textarea
               type="text"
               name="description"
+              required
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
@@ -94,6 +96,7 @@ const CreateSongForm = () => {
                 type="input"
                 name="image"
                 value={imageUrl}
+                required
                 title="Please enter a valid image url ('https://...')"
                 onChange={(e) => setImageUrl(e.target.value)}
                 pattern="https://.*"
@@ -106,6 +109,7 @@ const CreateSongForm = () => {
                 type="input"
                 name="song"
                 value={url}
+                required
                 title="Please enter a valid song url ('https://...')"
                 pattern="https://.*"
                 onChange={(e) => setUrl(e.target.value)}
