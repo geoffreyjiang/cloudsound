@@ -134,6 +134,7 @@ a {
   display: flex;
   justify-content: center;
   padding-top: 50px;
+  text-decoration: none;
 }
 /* .card {
   min-width: 500px;

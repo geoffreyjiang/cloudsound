@@ -44,7 +44,7 @@ const GetAllSongs = () => {
               ></img>
               <div className="song-title">
                 <a href={`/songs/${el.id}`}>
-                  <i className="fa-solid fa-play fa-2x song-btn"></i>
+                  <i className="fa-solid fa-play fa-2x song-btn "></i>
                   <br></br>
                   {el.title}
                 </a>

@@ -25,11 +25,11 @@ const SongDetail = () => {
   // console.log(commentUserId);
   // console.log(user.id);
   let delBtn;
-  const deleteCommentBtn = () => {
-    dispatch(deleteComment(commentId));
-    document.querySelector(".my-comments-section").remove();
-    window.location.reload();
-  };
+  // const deleteCommentBtn = () => {
+  //   dispatch(deleteComment(commentId));
+  //   document.querySelector(".my-comments-section").remove();
+  //   window.location.reload();
+  // };
   if (comments) {
     allComments = comments.map((el) => {
       console.log(el);
@@ -59,7 +59,12 @@ const SongDetail = () => {
             <div>{el.body}</div>
             <div>
               By: {y}
-              <button className="comment-btn" onClick={deleteCommentBtn}>
+              <button
+                onClick={async () => {
+                  await dispatch(deleteComment(el.id));
+                  window.location.reload();
+                }}
+              >
                 Delete
               </button>
             </div>
