@@ -81,3 +81,9 @@ section {
 .comment-btn {
   margin-left: 10px;
 }
+
+.comments-section {
+  display: flex;
+  padding: 5px;
+  border: 1px outset;
+}
