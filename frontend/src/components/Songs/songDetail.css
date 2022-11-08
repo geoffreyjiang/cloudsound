@@ -46,6 +46,8 @@ body {
 }
 audio {
   width: 100%;
+  background: #206ca0;
+  color: #206ca0;
   /* height: 500%; */
 }
 

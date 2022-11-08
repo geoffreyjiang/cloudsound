@@ -83,6 +83,7 @@ const EditSong = () => {
           <input
             type="text"
             name="title"
+            required
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           ></input>
@@ -92,6 +93,8 @@ const EditSong = () => {
             type="input"
             name="title"
             value={imageUrl}
+            pattern="https://.*"
+            title="Please enter a valid image url ('https://...')"
             onChange={(e) => setImageUrl(e.target.value)}
           ></input>
 
@@ -100,6 +103,8 @@ const EditSong = () => {
             type="input"
             name="title"
             value={url}
+            pattern="https://.*"
+            title="Please enter a valid song url ('https://...')"
             onChange={(e) => setUrl(e.target.value)}
           ></input>
 
@@ -107,6 +112,7 @@ const EditSong = () => {
           <textarea
             type="text"
             name="title"
+            required
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
