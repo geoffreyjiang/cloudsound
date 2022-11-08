@@ -60,6 +60,7 @@ const SongDetail = () => {
             <div>
               By: {y}
               <button
+                className="comment-btn"
                 onClick={async () => {
                   await dispatch(deleteComment(el.id));
                   window.location.reload();
