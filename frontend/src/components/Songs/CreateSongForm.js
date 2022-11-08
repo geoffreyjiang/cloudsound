@@ -27,12 +27,7 @@ const CreateSongForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(title, "title");
-    // console.log(imageUrl, "img");
-    // console.log(url, "url");
-    // console.log(description, "description");
-    // if (!imageUrl.startsWith("https://")) alert("Invalid image url!");
-    // if (!url.startsWith("https://")) alert("Invalid song url!");
+
     setSubmitted(true);
     if (!sessionUser) {
       alert("User must be logged in!");
@@ -44,14 +39,12 @@ const CreateSongForm = () => {
       description,
       userId: sessionUser.id,
     };
-    // console.log(data);
-    // if (data && data.errors) setErrors(data.errors);
+
     let newSong = await dispatch(createSong(data));
     setSubmitted(false);
-
+    console.log(newSong);
     if (newSong) {
-      history.push(`/songs`);
-      window.location.reload();
+      history.push(`/songs/${newSong.id}`);
     }
   };
 

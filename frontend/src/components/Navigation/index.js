@@ -52,13 +52,13 @@ function Navigation({ isLoaded }) {
         </span>
         <div className="nav-links"></div>
         {/* <a href="artists">Artists</a> */}
-        <a href="/songs">
+        <NavLink to="/songs">
           <i className="fa-solid fa-headphones fa-2x nav-btn"></i>
-        </a>
+        </NavLink>
         {/* <a href="/albums">Albums</a> */}
-        <a href="/create">
+        <NavLink to="/create">
           <i className="fa-solid fa-upload fa-2x nav-btn"></i>
-        </a>
+        </NavLink>
         {sessionLinks}
       </nav>
     </>

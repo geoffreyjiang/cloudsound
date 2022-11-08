@@ -88,18 +88,19 @@ const songsReducer = (state = {}, action) => {
   // action.songs.forEach((el) => console.log(el));
   switch (action.type) {
     case LOAD:
-      return { ...state, ...action.songs };
+      return { ...action.songs };
     case ADD:
       newState[action.song.id] = action.song;
-      // console.log(newState);
       return newState;
     case UPDATE:
       newState = { ...state, [action.song.id]: action.song };
       return newState;
     case GetSongById:
       return {
-        ...state,
-        [action.song.id]: { ...state[action.song.id], ...action.song },
+        [action.song.id]: {
+          ...state[action.song.id],
+          ...action.song,
+        },
       };
     case DELETE:
       delete newState[action.id];

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Redirect } from "react-router-dom";
 import { songById, removeSong } from "../../store/songs";
 import { useSelector, useDispatch } from "react-redux";
 import { getComments, deleteComment } from "../../store/comments";
@@ -30,27 +30,49 @@ const SongDetail = () => {
   //   document.querySelector(".my-comments-section").remove();
   //   window.location.reload();
   // };
-  if (comments) {
-    allComments = comments.map((el) => {
-      console.log(el);
 
+  if (comments) {
+    let username;
+    // comments.forEach((el) => {});
+    allComments = comments.map((el) => {
       // commentUserId = el.User.id;
       let y;
       commentId = el.id;
-      !el.User ? (y = "anon") : (y = el.User.username);
-
+      // el.User ? (y = el.User.username) : (y = "anon");
+      console.log(el);
+      // return (
+      //   <div className="my-comments-section comments-section">
+      //     <div>{el.body}</div>
+      //     <div>
+      //       By: {el.username}
+      //       <button
+      //         className="comment-btn"
+      //         onClick={async () => {
+      //           if (el.username !== user.username) {
+      //             alert("this is not your comment");
+      //           } else {
+      //             await dispatch(deleteComment(el.id));
+      //             history.push(`/songs/${id}`);
+      //           }
+      //         }}
+      //       >
+      //         Delete
+      //       </button>
+      //     </div>
+      //   </div>
+      // );
       if (!user) {
         return (
           <div className="comments-section">
             <div>{el.body}</div>
-            <div>By: {y}</div>
+            <div>By: {el.username}</div>
           </div>
         );
-      } else if (el.User.id !== user.id) {
+      } else if (el.username !== user.username) {
         return (
           <div className="comments-section">
             <div>{el.body}</div>
-            <div>By: {y}</div>
+            <div>By: {el.username}</div>
           </div>
         );
       } else {
@@ -58,12 +80,12 @@ const SongDetail = () => {
           <div className="my-comments-section comments-section">
             <div>{el.body}</div>
             <div>
-              By: {y}
+              By: {el.username}
               <button
                 className="comment-btn"
                 onClick={async () => {
                   await dispatch(deleteComment(el.id));
-                  window.location.reload();
+                  // <Redirect replace to={`/songs/${id}`} />;
                 }}
               >
                 Delete
@@ -90,15 +112,21 @@ const SongDetail = () => {
       history.push(`/songs/`);
     }
   };
-
+  // const loadComments = () => {
+  //   dispatch(songById(id));
+  //   dispatch(getComments());
+  // };
+  // loadComments();
   useEffect(() => {
     const load = async () => {
+      // await dispatch(getAllSongs());
+      // loadComments();
       dispatch(songById(id));
-      //   dispatch(getAllSongs());
+
       dispatch(getComments(id));
     };
     load();
-  }, [id, dispatch]);
+  }, [dispatch, id]);
 
   // console.log(userId);
   const details = song.map((el, i) => {
@@ -145,6 +173,8 @@ const SongDetail = () => {
       </>
     );
   });
+
+  // loadComments();
   return (
     <>
       <div key={id} className="song-containerer">

@@ -28,38 +28,12 @@ const EditSong = () => {
   const [imageUrl, setImageUrl] = useState(i);
   const [url, setUrl] = useState(u);
   const [description, setDescription] = useState(d);
-  //   useEffect(() => {
-  //     song.forEach((el) => {
-  //       return (
-  //         setTitle(el.title),
-  //         setImageUrl(el.imageUrl),
-  //         setDescription(el.description)
-  //       );
-  //     });
-  //   }, [title, imageUrl, description]);
 
-  // if (!title) {
-  //   song.forEach((el) => {
-  //     return (
-  //       setTitle(t),
-  //       setImageUrl(el.imageUrl),
-  //       setDescription(el.description),
-  //       setUrl(el.url)
-  //     );
-  //   });
-  // }
   useEffect(() => {
     dispatch(songById(id));
     // dispatch(updateSong());
   }, [dispatch, id]);
 
-  // if (!user || user.id !== userId) {
-  //   return (
-  //     <div>
-  //       <div> This is not your song!</div>
-  //     </div>
-  //   );
-  // }
   const handleSubmit = async (e) => {
     e.preventDefault();
 

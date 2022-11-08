@@ -5,11 +5,10 @@ const { setTokenCookie, restoreUser } = require("../../utils/auth");
 
 router.post("/:id/comments", restoreUser, async (req, res) => {
   const { id } = req.params;
-  const { body } = req.body;
+  const { body, username } = req.body;
   const { user } = req;
   const current = user.toSafeObject();
   const song = await Song.findOne({ where: { id } });
-
   if (!song) {
     res.status(404);
     res.json({
@@ -29,7 +28,7 @@ router.post("/:id/comments", restoreUser, async (req, res) => {
     body,
     songId: id,
     userId: current.id,
-    user,
+    username,
   });
   // console.log(comment);
   res.json(comment);
@@ -64,7 +63,7 @@ router.post("/", restoreUser, async (req, res) => {
   const current = user.toSafeObject();
   // const { title, description, url, imageUrl, albumId } = req.body;
   // const album = await Album.findOne({ where: { id: albumId } });
-  const { title, description, url, imageUrl } = req.body;
+  const { title, description, url, imageUrl, username } = req.body;
 
   // if (!album) {
   //   res.status(404);
@@ -101,6 +100,7 @@ router.post("/", restoreUser, async (req, res) => {
     url,
     imageUrl,
     // albumId,
+    username,
     userId: current.id,
   });
 

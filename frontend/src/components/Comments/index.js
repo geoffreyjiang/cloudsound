@@ -1,4 +1,4 @@
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Redirect } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createComment } from "../../store/comments";
@@ -14,19 +14,28 @@ const CreateComment = () => {
     if (!user) {
       alert("Please login!");
     }
-
-    window.location.reload();
+    // window.location.reload();
+    console.log(user.username);
     const data = {
       userId: user.id,
       songId: id,
       body,
-      user: user.username,
+      username: user.username,
     };
 
     if (!body) {
       alert("Comment cannot be empty!");
-    } else await dispatch(createComment(id, data));
-    setBody("");
+    } else {
+      dispatch(createComment(id, data));
+      // history.push(`/songs/${id}`);
+      // history.push(`/songs/`);
+      // history.push(`/songs/${id}`);
+      setBody("");
+    }
+
+    // await dispatch(createComment(id, data));
+    // setBody("");
+
     // if (newComment) {
     //   window.location.reload();
     // }
@@ -41,7 +50,7 @@ const CreateComment = () => {
               type="text"
               name="comment"
               value={body}
-              onChange={(e) => setBody(e.target.value)}
+              onChange={(e) => setBody(`${e.target.value}`)}
             ></textarea>
           </div>
 

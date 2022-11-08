@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { getAllSongs } from "../../store/songs";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./Songs.css";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 // import SongDetail from "./SongDetail";
 const GetAllSongs = () => {
   const songs = useSelector((state) => Object.values(state.songs));
   const dispatch = useDispatch();
-
+  const history = useHistory(4);
   useEffect(() => {
     const load = async () => {
       dispatch(getAllSongs());
@@ -43,11 +44,19 @@ const GetAllSongs = () => {
                 // }}
               ></img>
               <div className="song-title">
-                <a href={`/songs/${el.id}`}>
+                <Link to={`/songs/${el.id}`}>
                   <i className="fa-solid fa-play fa-2x song-btn "></i>
                   <br></br>
                   {el.title}
-                </a>
+                </Link>
+                {/* <button
+                  className="song-btn"
+                  onClick={() => history.push(`/songs/${el.id}`)}
+                >
+                  <i className="fa-solid fa-play fa-2x song-btn "></i>
+                  <br></br>
+                  {el.title}
+                </button> */}
               </div>
             </div>
           </div>

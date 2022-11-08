@@ -96,7 +96,10 @@ const commentReducer = (state = {}, action) => {
   let newState = { ...state };
   switch (action.type) {
     case GET:
-      return { ...state, ...action.comment };
+      action.comment.forEach((el) => {
+        newState[el.id] = el;
+      });
+      return { ...state, ...newState };
     case CREATE:
       newState[action.comment.id] = action.comment;
       return newState;
