@@ -77,3 +77,7 @@ section {
   text-transform: u;
   font-size: 18px;
 }
+
+.comment-btn {
+  margin-left: 10px;
+}

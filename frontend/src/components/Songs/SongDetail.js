@@ -27,6 +27,7 @@ const SongDetail = () => {
   let delBtn;
   const deleteCommentBtn = () => {
     dispatch(deleteComment(commentId));
+    document.querySelector(".my-comments-section").remove();
     window.location.reload();
   };
   if (comments) {
@@ -54,10 +55,14 @@ const SongDetail = () => {
         );
       } else {
         return (
-          <div className="comments-section">
+          <div className="my-comments-section comments-section">
             <div>{el.body}</div>
-            <div>By: {y}</div>
-            <button onClick={deleteCommentBtn}>Delete</button>
+            <div>
+              By: {y}
+              <button className="comment-btn" onClick={deleteCommentBtn}>
+                Delete
+              </button>
+            </div>
           </div>
         );
       }
