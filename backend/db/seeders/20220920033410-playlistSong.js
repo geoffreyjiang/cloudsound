@@ -1,46 +1,24 @@
 "use strict";
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert(
-      "PlaylistSongs",
-      [
-        {
-          playlistId: 1,
-          songId: 2,
-          createdAt: Sequelize.literal("CURRENT_TIMESTAMP"),
-          updatedAt: Sequelize.literal("CURRENT_TIMESTAMP"),
-        },
-        {
-          playlistId: 3,
-          songId: 1,
-          createdAt: Sequelize.literal("CURRENT_TIMESTAMP"),
-          updatedAt: Sequelize.literal("CURRENT_TIMESTAMP"),
-        },
-        {
-          playlistId: 2,
-          songId: 3,
-          createdAt: Sequelize.literal("CURRENT_TIMESTAMP"),
-          updatedAt: Sequelize.literal("CURRENT_TIMESTAMP"),
-        },
-        {
-          playlistId: 4,
-          songId: 2,
-          createdAt: Sequelize.literal("CURRENT_TIMESTAMP"),
-          updatedAt: Sequelize.literal("CURRENT_TIMESTAMP"),
-        },
-        {
-          playlistId: 4,
-          songId: 1,
-          createdAt: Sequelize.literal("CURRENT_TIMESTAMP"),
-          updatedAt: Sequelize.literal("CURRENT_TIMESTAMP"),
-        },
-      ],
-      {}
-    );
-  },
+    async up(queryInterface, Sequelize) {
+        await queryInterface.bulkInsert("PlaylistSongs", [
+            {
+                playlistId: 1,
+                songId: 2,
+            },
+            {
+                playlistId: 3,
+                songId: 1,
+            },
+            {
+                playlistId: 2,
+                songId: 3,
+            },
+        ]);
+    },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("PlaylistSongs", null, {});
-  },
+    async down(queryInterface, Sequelize) {
+        await queryInterface.bulkDelete("PlaylistSongs", null, {});
+    },
 };
