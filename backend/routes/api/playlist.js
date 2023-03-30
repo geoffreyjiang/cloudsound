@@ -39,10 +39,10 @@ router.post("/", restoreUser, async (req, res) => {
     });
     res.json(playlist);
 });
-router.post("/:id", requireAuth, restoreUser, async (req, res) => {
+
+router.post("/:id", restoreUser, async (req, res) => {
     const { id } = req.params;
     const { songId } = req.body;
-    const { user } = req;
     const playlist = await Playlist.findByPk(id);
     const song = await Song.findByPk(songId);
 

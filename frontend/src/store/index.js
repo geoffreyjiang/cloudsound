@@ -3,25 +3,27 @@ import thunk from "redux-thunk";
 import commentReducer from "./comments";
 import sessionReducer from "./session";
 import songsReducer from "./songs";
+import playlistReducer from "./playlists";
 const rootReducer = combineReducers({
-  session: sessionReducer,
-  songs: songsReducer,
-  comments: commentReducer,
+    session: sessionReducer,
+    songs: songsReducer,
+    comments: commentReducer,
+    playlists: playlistReducer,
 });
 
 let enhancer;
 
 if (process.env.NODE_ENV === "production") {
-  enhancer = applyMiddleware(thunk);
+    enhancer = applyMiddleware(thunk);
 } else {
-  const logger = require("redux-logger").default;
-  const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  enhancer = composeEnhancers(applyMiddleware(thunk, logger));
+    const logger = require("redux-logger").default;
+    const composeEnhancers =
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    enhancer = composeEnhancers(applyMiddleware(thunk, logger));
 }
 
 const configureStore = (preloadedState) => {
-  return createStore(rootReducer, preloadedState, enhancer);
+    return createStore(rootReducer, preloadedState, enhancer);
 };
 
 export default configureStore;
