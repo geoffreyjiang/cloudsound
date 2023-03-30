@@ -31,9 +31,9 @@ const remove = (id) => {
     };
 };
 
-const playlistId = (id) => ({
+const playlistId = (playlist) => ({
     type: GETID,
-    id,
+    playlist,
 });
 
 export const getPlaylistId = (id) => async (dispatch) => {
@@ -99,6 +99,13 @@ const playlistReducer = (state = {}, action) => {
         case CREATE:
             newState[action.playlist.id] = action.playlist;
             return newState;
+        case GETID:
+            return {
+                [action.playlist.id]: {
+                    ...state[action.playlist.id],
+                    ...action.playlist,
+                },
+            };
         default:
             return state;
     }

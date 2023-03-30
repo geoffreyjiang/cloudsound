@@ -50,14 +50,6 @@ const GetAllSongs = () => {
                                     <br></br>
                                     {el.title}
                                 </Link>
-                                {/* <button
-                  className="song-btn"
-                  onClick={() => history.push(`/songs/${el.id}`)}
-                >
-                  <i className="fa-solid fa-play fa-2x song-btn "></i>
-                  <br></br>
-                  {el.title}
-                </button> */}
                             </div>
                         </div>
                     </div>
