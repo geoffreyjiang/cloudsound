@@ -9,48 +9,52 @@ import CreateSongForm from "./components/Songs/CreateSongForm";
 import SongDetail from "./components/Songs/SongDetail";
 import EditSong from "./components/Songs/EditSong";
 import HomePage from "./components/HomePage";
+import PlaylistDetail from "./components/Playlist/PlaylistID";
 // import EditComment from "./components/Comments/EditComment";
 import * as sessionActions from "./store/session";
 function App() {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+    const dispatch = useDispatch();
+    const [isLoaded, setIsLoaded] = useState(false);
+    useEffect(() => {
+        dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    }, [dispatch]);
 
-  return (
-    <>
-      <Navigation isLoadecd={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupForm />
-          </Route>
-          <Route path="/songs/:id/edit">
-            <EditSong />
-          </Route>
-          <Route exact path="/songs/:id">
-            <SongDetail />
-          </Route>
-          <Route path="/create">
-            <CreateSongForm />
-          </Route>
-          {/* <Route exact path="/comments/:id">
+    return (
+        <>
+            <Navigation isLoadecd={isLoaded} />
+            {isLoaded && (
+                <Switch>
+                    <Route exact path="/">
+                        <HomePage />
+                    </Route>
+                    <Route path="/login">
+                        <LoginFormPage />
+                    </Route>
+                    <Route path="/signup">
+                        <SignupForm />
+                    </Route>
+                    <Route path="/songs/:id/edit">
+                        <EditSong />
+                    </Route>
+                    <Route exact path="/songs/:id">
+                        <SongDetail />
+                    </Route>
+                    <Route path="/create">
+                        <CreateSongForm />
+                    </Route>
+                    <Route exact path="/playlists/:id">
+                        <PlaylistDetail />
+                    </Route>
+                    {/* <Route exact path="/comments/:id">
             <EditComment />
           </Route> */}
-          <Route path="/songs">
-            <GetAllSongs />
-          </Route>
-        </Switch>
-      )}
-    </>
-  );
+                    <Route path="/songs">
+                        <GetAllSongs />
+                    </Route>
+                </Switch>
+            )}
+        </>
+    );
 }
 
 export default App;

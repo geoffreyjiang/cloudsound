@@ -100,12 +100,7 @@ const playlistReducer = (state = {}, action) => {
             newState[action.playlist.id] = action.playlist;
             return newState;
         case GETID:
-            return {
-                [action.playlist.id]: {
-                    ...state[action.playlist.id],
-                    ...action.playlist,
-                },
-            };
+            return { ...newState, [action.playlist.id]: action.playlist };
         default:
             return state;
     }

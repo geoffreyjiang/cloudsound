@@ -15,6 +15,10 @@ module.exports = {
                 playlistId: 2,
                 songId: 3,
             },
+            {
+                playlistId: 1,
+                songId: 1,
+            },
         ]);
     },
 
