@@ -16,27 +16,15 @@ const PlaylistDetail = () => {
     useEffect(() => {
         dispatch(getPlaylistId(id));
     }, [dispatch]);
-    console.log(playlist);
-    // let songs = playlist.songs.map((el) => {
-    //     return el.title;
-    // });
+    console.log(playlist.name);
 
-    // console.log(playlist[id].Songs);
-    // let songs;
-    // if (playlist[id].Songs) {
-    //     songs = playlist[id].Songs.map((el) => {
-    //         return <div>{el.title}</div>;
-    //     });
-    // } else {
-    //     songs = <div>Empty playlist!</div>;
-    // }
     return (
         <>
             <div className="playlist-section">
                 <div className="playlist-container">
                     {playlist?.map((el) => {
-                        console.log(el);
-                        console.log(el.Songs);
+                        // console.log(el);
+                        // console.log(el.Songs);
 
                         return (
                             <>
@@ -71,7 +59,7 @@ const PlaylistDetail = () => {
                 </div>
             </div>
             <div className="audio-player-container">
-                <AudioPlayer src={currSong} headers={songTitle} />
+                <AudioPlayer src={currSong} header={songTitle} />
             </div>
         </>
     );

@@ -29,3 +29,8 @@
 .playlist-playBtn {
     cursor: pointer;
 }
+
+.rhap_header {
+    display: flex;
+    justify-content: center;
+}
