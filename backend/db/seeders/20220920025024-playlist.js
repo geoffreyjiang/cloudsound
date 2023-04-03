@@ -20,10 +20,18 @@ module.exports = {
                 updatedAt: Sequelize.literal("CURRENT_TIMESTAMP"),
             },
             {
-                userId: 4,
+                userId: 3,
                 name: "The best Playlist",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2018/04/11/19/48/music-3311599__340.png",
+                createdAt: Sequelize.literal("CURRENT_TIMESTAMP"),
+                updatedAt: Sequelize.literal("CURRENT_TIMESTAMP"),
+            },
+            {
+                userId: 1,
+                name: "Yeeeeeee",
+                imageUrl:
+                    "https://cdn.pixabay.com/photo/2020/05/25/17/05/mockup-5219512__340.jpg",
                 createdAt: Sequelize.literal("CURRENT_TIMESTAMP"),
                 updatedAt: Sequelize.literal("CURRENT_TIMESTAMP"),
             },

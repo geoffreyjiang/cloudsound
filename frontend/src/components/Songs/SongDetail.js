@@ -15,27 +15,17 @@ const SongDetail = () => {
     const history = useHistory();
     const song = useSelector((state) => Object.values(state.songs));
     const comments = useSelector((state) => Object.values(state.comments));
-    // console.log(comments);
-    // comments.forEach((el) => console.log(el));
 
     let commentId;
     let allComments;
     let commentUserId;
     let userId;
-    // console.log(commentUserId);
-    // console.log(user.id);
+
     let delBtn;
-    // const deleteCommentBtn = () => {
-    //   dispatch(deleteComment(commentId));
-    //   document.querySelector(".my-comments-section").remove();
-    //   window.location.reload();
-    // };
 
     if (comments) {
         let username;
-        // comments.forEach((el) => {});
         allComments = comments.map((el) => {
-            // commentUserId = el.User.id;
             let y;
             commentId = el.id;
 
@@ -63,7 +53,6 @@ const SongDetail = () => {
                                 className="comment-btn"
                                 onClick={async () => {
                                     await dispatch(deleteComment(el.id));
-                                    // <Redirect replace to={`/songs/${id}`} />;
                                 }}
                             >
                                 Delete
@@ -90,15 +79,9 @@ const SongDetail = () => {
             history.push(`/songs/`);
         }
     };
-    // const loadComments = () => {
-    //   dispatch(songById(id));
-    //   dispatch(getComments());
-    // };
-    // loadComments();
+
     useEffect(() => {
         const load = async () => {
-            // await dispatch(getAllSongs());
-            // loadComments();
             dispatch(songById(id));
 
             dispatch(getComments(id));
@@ -106,7 +89,6 @@ const SongDetail = () => {
         load();
     }, [dispatch, id]);
 
-    // console.log(userId);
     const details = song.map((el, i) => {
         // console.log(el);
         userId = el.userId;
@@ -139,14 +121,12 @@ const SongDetail = () => {
                             Description<h2>{el.description}</h2>
                         </label>
 
-                        {/* <Link to={`/songs/${el.id}/edit`}>Edit</Link> */}
                         <button onClick={editBtn}>Edit</button>
                         <button onClick={deleteBtn}>Delete</button>
-                        <audio controls src={el.url}>
+                        <audio id="song-audio" controls src={el.url}>
                             <a href={el.url}>Link</a>
                         </audio>
                     </div>
-                    {/* <div>Url:{el.url}</div> */}
                 </div>
             </>
         );

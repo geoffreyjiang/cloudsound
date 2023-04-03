@@ -1,33 +1,77 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useHistory, Redirect } from "react-router-dom";
-import { getPlaylistId } from "../../../store/playlists";
+import { getPlaylistId, getAllPlaylist } from "../../../store/playlists";
 import { useDispatch, useSelector } from "react-redux";
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
+
 import "./index.css";
 const PlaylistDetail = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const playlist = useSelector((store) => store.playlists);
+    const playlist = useSelector((store) => Object.values(store.playlists));
     const user = useSelector((state) => state.session.user);
+    const [currSong, setCurrSong] = useState("");
+    const [songTitle, setSongTitle] = useState("");
     useEffect(() => {
         dispatch(getPlaylistId(id));
     }, [dispatch]);
-    console.log(id);
-
+    console.log(playlist);
     // let songs = playlist.songs.map((el) => {
     //     return el.title;
     // });
 
-    console.log(playlist[id].Songs);
-    let songs;
-    if (playlist[id].Songs) {
-        songs = playlist[id].Songs.map((el) => {
-            return <div>{el.title}</div>;
-        });
-    }
+    // console.log(playlist[id].Songs);
+    // let songs;
+    // if (playlist[id].Songs) {
+    //     songs = playlist[id].Songs.map((el) => {
+    //         return <div>{el.title}</div>;
+    //     });
+    // } else {
+    //     songs = <div>Empty playlist!</div>;
+    // }
     return (
         <>
-            <div className="playlist-container">
-                <div className="playlist-songs">{songs}</div>
+            <div className="playlist-section">
+                <div className="playlist-container">
+                    {playlist?.map((el) => {
+                        console.log(el);
+                        console.log(el.Songs);
+
+                        return (
+                            <>
+                                <div className="playlist-title">
+                                    <h1>{el?.name}</h1>
+                                </div>
+                                <div className="playlist-songs">
+                                    {el?.Songs?.map((songs) => {
+                                        return (
+                                            <ul>
+                                                <div className="song-list-item">
+                                                    <i
+                                                        className="fa-solid fa-play playlist-playBtn"
+                                                        onClick={() => {
+                                                            setCurrSong(
+                                                                songs.url
+                                                            );
+                                                            setSongTitle(
+                                                                songs.title
+                                                            );
+                                                        }}
+                                                    ></i>
+                                                    <li>{songs.title}</li>
+                                                </div>
+                                            </ul>
+                                        );
+                                    })}
+                                </div>
+                            </>
+                        );
+                    })}
+                </div>
+            </div>
+            <div className="audio-player-container">
+                <AudioPlayer src={currSong} headers={songTitle} />
             </div>
         </>
     );
