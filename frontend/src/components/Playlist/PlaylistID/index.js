@@ -13,6 +13,9 @@ const PlaylistDetail = () => {
     const user = useSelector((state) => state.session.user);
     const [currSong, setCurrSong] = useState("");
     const [songTitle, setSongTitle] = useState("");
+    const [songImg, setSongImg] = useState(
+        "https://cdn.pixabay.com/photo/2017/01/09/20/11/music-1967480__340.png"
+    );
     useEffect(() => {
         dispatch(getPlaylistId(id));
     }, [dispatch]);
@@ -30,29 +33,27 @@ const PlaylistDetail = () => {
                             <>
                                 <div className="playlist-title">
                                     <h1>{el?.name}</h1>
+                                    <img
+                                        src={songImg}
+                                        className="playlist-songImg"
+                                    ></img>
                                 </div>
-                                <div className="playlist-songs">
-                                    {el?.Songs?.map((songs) => {
-                                        return (
-                                            <ul>
-                                                <div className="song-list-item">
-                                                    <i
-                                                        className="fa-solid fa-play playlist-playBtn"
-                                                        onClick={() => {
-                                                            setCurrSong(
-                                                                songs.url
-                                                            );
-                                                            setSongTitle(
-                                                                songs.title
-                                                            );
-                                                        }}
-                                                    ></i>
-                                                    <li>{songs.title}</li>
-                                                </div>
-                                            </ul>
-                                        );
-                                    })}
-                                </div>
+                                {el?.Songs?.map((songs) => {
+                                    return (
+                                        <div className="song-list-item">
+                                            <i
+                                                className="fa-solid fa-play playlist-playBtn"
+                                                onClick={() => {
+                                                    setCurrSong(songs.url);
+                                                    setSongTitle(songs.title);
+                                                    setSongImg(songs.imageUrl);
+                                                }}
+                                            >
+                                                {songs.title}
+                                            </i>
+                                        </div>
+                                    );
+                                })}
                             </>
                         );
                     })}
