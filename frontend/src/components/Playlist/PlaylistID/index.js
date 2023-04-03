@@ -13,13 +13,11 @@ const PlaylistDetail = () => {
     const user = useSelector((state) => state.session.user);
     const [currSong, setCurrSong] = useState("");
     const [songTitle, setSongTitle] = useState("");
-    const [songImg, setSongImg] = useState(
-        "https://cdn.pixabay.com/photo/2017/01/09/20/11/music-1967480__340.png"
-    );
+    const [songImg, setSongImg] = useState();
     useEffect(() => {
         dispatch(getPlaylistId(id));
+        setSongImg(playlist?.map((el) => el?.imageUrl));
     }, [dispatch]);
-    console.log(playlist.name);
 
     return (
         <>
