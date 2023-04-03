@@ -12,13 +12,13 @@ const GetPlaylists = () => {
     }, []);
     let data;
     if (playlists) {
-        data = playlists.map((el, i) => {
+        data = playlists?.map((el, i) => {
             return (
                 <div key={el.id} className="card">
                     <div key={i} className="image">
                         <img
                             className="card-img"
-                            src={el.imageUrl}
+                            src={el?.imageUrl}
                             alt="no pic avail!"
                         ></img>
                         <div className="song-title">
