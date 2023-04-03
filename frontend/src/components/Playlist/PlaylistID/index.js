@@ -13,10 +13,9 @@ const PlaylistDetail = () => {
     const user = useSelector((state) => state.session.user);
     const [currSong, setCurrSong] = useState("");
     const [songTitle, setSongTitle] = useState("");
-    const [songImg, setSongImg] = useState();
+    const [songImg, setSongImg] = useState(playlist[0]?.imageUrl);
     useEffect(() => {
         dispatch(getPlaylistId(id));
-        setSongImg(playlist?.map((el) => el?.imageUrl));
     }, [dispatch]);
 
     return (
@@ -26,7 +25,7 @@ const PlaylistDetail = () => {
                     {playlist?.map((el) => {
                         // console.log(el);
                         // console.log(el.Songs);
-
+                        // console.log(el);
                         return (
                             <>
                                 <div className="playlist-title">

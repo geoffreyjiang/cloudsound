@@ -43,6 +43,10 @@
     padding: 2px;
 }
 
+.song-list-item :hover {
+    background-color: #206ca0;
+}
+
 .rhap_header {
     display: flex;
     justify-content: center;
