@@ -3,6 +3,7 @@ import { getAllPlaylist } from "../../store/playlists";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import PlaylistModal from "../Modals/PlaylistModal/playlistModal";
+import "./index.css";
 const GetPlaylists = () => {
     const playlists = useSelector((state) => Object.values(state.playlists));
     const state = useSelector((state) => console.log(state));
@@ -45,20 +46,20 @@ const GetPlaylists = () => {
                     className="icon"
                     onClick={() => {
                         document
-                            .querySelector(".data-container")
+                            .querySelector(".playlist-scroller")
                             .scrollBy(-350, 0);
                     }}
                 >
                     <i className="fa-solid fa-angles-left fa-3x arrows" fa></i>
                 </button>
                 <div className="song-container">
-                    <div className="data-container">{data}</div>;
+                    <div className="playlist-scroller">{data}</div>;
                 </div>
                 <button
                     className="icon"
                     onClick={() => {
                         document
-                            .querySelector(".data-container")
+                            .querySelector(".playlist-scroller")
                             .scrollBy(350, 0);
                     }}
                 >
