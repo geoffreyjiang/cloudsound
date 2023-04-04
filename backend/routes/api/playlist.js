@@ -45,12 +45,12 @@ router.post("/:id", restoreUser, async (req, res) => {
     const { songId } = req.body;
     const playlist = await Playlist.findByPk(id);
     const song = await Song.findByPk(songId);
-
-    await PlaylistSong.create({
-        songId: playlist.id,
-        playlistId: song.id,
-    });
-
+    playlist.Songs.push(songId);
+    // await PlaylistSong.create({
+    //     songId: playlist.id,
+    //     playlistId: song.id,
+    // });
+    console.log(playlist);
     res.json(playlist);
 });
 module.exports = router;
