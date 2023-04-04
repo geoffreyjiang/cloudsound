@@ -9,48 +9,41 @@ import "./index.css";
 const PlaylistDetail = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const playlist = useSelector((store) => Object.values(store.playlists));
-    const user = useSelector((state) => state.session.user);
+    const playlist = useSelector((store) => store.playlists[id]);
     const [currSong, setCurrSong] = useState("");
     const [songTitle, setSongTitle] = useState("");
-    const [songImg, setSongImg] = useState(playlist[0]?.imageUrl);
+    const [songImg, setSongImg] = useState();
     useEffect(() => {
         dispatch(getPlaylistId(id));
-    }, [dispatch]);
-    console.log(playlist[0]);
+        setSongImg(playlist?.imageUrl);
+    }, [dispatch, songImg]);
+    console.log(songImg);
+    console.log(playlist.imageUrl);
     return (
         <>
             <div className="playlist-section">
                 <div className="playlist-container">
-                    {playlist?.map((el) => {
-                        // console.log(el);
-                        // console.log(el.Songs);
+                    <div className="playlist-title">
+                        <h1>{playlist?.name}</h1>
+                        <img
+                            src={playlist?.imageUrl}
+                            className="playlist-songImg"
+                        ></img>
+                    </div>
+                    {playlist?.Songs?.map((songs, i) => {
                         return (
-                            <>
-                                <div className="playlist-title">
-                                    <h1>{el?.name}</h1>
-                                    <img
-                                        src={songImg}
-                                        className="playlist-songImg"
-                                    ></img>
-                                </div>
-                                {el?.Songs?.map((songs, i) => {
-                                    return (
-                                        <div key={i} className="song-list-item">
-                                            <i
-                                                className="fa-solid fa-play playlist-playBtn"
-                                                onClick={() => {
-                                                    setCurrSong(songs.url);
-                                                    setSongTitle(songs.title);
-                                                    setSongImg(songs.imageUrl);
-                                                }}
-                                            >
-                                                {songs.title}
-                                            </i>
-                                        </div>
-                                    );
-                                })}
-                            </>
+                            <div key={i} className="song-list-item">
+                                <i
+                                    className="fa-solid fa-play playlist-playBtn"
+                                    onClick={() => {
+                                        setCurrSong(songs.url);
+                                        setSongTitle(songs.title);
+                                        setSongImg(songs.imageUrl);
+                                    }}
+                                >
+                                    {songs.title}
+                                </i>
+                            </div>
                         );
                     })}
                 </div>

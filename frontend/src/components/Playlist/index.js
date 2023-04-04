@@ -5,8 +5,9 @@ import { useHistory, Link } from "react-router-dom";
 
 const GetPlaylists = () => {
     const playlists = useSelector((state) => Object.values(state.playlists));
+    const state = useSelector((state) => console.log(state));
     const dispatch = useDispatch();
-
+    console.log(playlists);
     useEffect(() => {
         dispatch(getAllPlaylist());
     }, []);

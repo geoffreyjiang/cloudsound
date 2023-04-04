@@ -42,7 +42,6 @@ export const getPlaylistId = (id) => async (dispatch) => {
     if (res.ok) {
         const data = await res.json();
         dispatch(playlistId(data));
-        return data;
     }
 };
 
@@ -51,7 +50,6 @@ export const getAllPlaylist = () => async (dispatch) => {
     if (res.ok) {
         const data = await res.json();
         dispatch(load(data));
-        return res;
     }
 };
 export const createPlaylist = (playlist) => async (dispatch) => {
@@ -66,7 +64,6 @@ export const createPlaylist = (playlist) => async (dispatch) => {
     if (res.ok) {
         const data = await res.json();
         dispatch(create(data));
-        return data;
     }
 };
 // export const deleteComment = (id) => async (dispatch) => {
@@ -95,18 +92,18 @@ const playlistReducer = (state = {}, action) => {
     let newState = { ...state };
     switch (action.type) {
         case GET:
-            return { ...newState, ...action.playlist };
+            return { ...action.playlist };
         case CREATE:
             newState[action.playlist.id] = action.playlist;
             return newState;
         case GETID:
-            // return { ...newState, [action.playlist.id]: action.playlist };
-            return {
-                [action.playlist.id]: {
-                    ...state[action.playlist.id],
-                    ...action.playlist,
-                },
-            };
+            return { ...newState, [action.playlist.id]: action.playlist };
+        // return {
+        //     [action.playlist.id]: {
+        //         ...state[action.playlist.id],
+        //         ...action.playlist,
+        //     },
+        // };
         default:
             return state;
     }

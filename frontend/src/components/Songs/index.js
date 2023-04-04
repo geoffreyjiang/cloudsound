@@ -9,29 +9,21 @@ import GetPlaylists from "../Playlist";
 const GetAllSongs = () => {
     const songs = useSelector((state) => Object.values(state.songs));
     const dispatch = useDispatch();
-    const history = useHistory(4);
+    const history = useHistory();
     useEffect(() => {
         const load = async () => {
             dispatch(getAllSongs());
         };
         load();
     }, [dispatch]);
-    // console.log(songs);
-    //   songs.forEach((el) => console.log(el.title));
+
     let data;
 
-    // const renderDetail = () => {
-    //   return (
-    //     <div className="render-detail">
-    //       <SongDetail />
-    //     </div>
-    //   );
-    // };
     if (songs) {
         data = songs.map((el, i) => {
             return (
                 <>
-                    <div className="song-details">
+                    <div key={i} className="song-details">
                         <audio src={el.url}></audio>
                     </div>
                     <div key={el.id} className="card">
@@ -44,8 +36,8 @@ const GetAllSongs = () => {
                                 //   history.push(`/songs/${id}`);
                                 // }}
                             ></img>
-                            <div className="song-title">
-                                <Link to={`/songs/${el.id}`}>
+                            <div key={i} className="song-title">
+                                <Link key={i} to={`/songs/${el.id}`}>
                                     <i className="fa-solid fa-play fa-2x song-btn "></i>
                                     <br></br>
                                     {el.title}
