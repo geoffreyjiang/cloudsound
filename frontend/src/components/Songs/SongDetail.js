@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, useHistory, Redirect } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { songById, removeSong } from "../../store/songs";
 import { useSelector, useDispatch } from "react-redux";
 import { getComments, deleteComment } from "../../store/comments";
@@ -18,15 +18,10 @@ const SongDetail = () => {
 
     let commentId;
     let allComments;
-    let commentUserId;
     let userId;
 
-    let delBtn;
-
     if (comments) {
-        let username;
         allComments = comments.map((el) => {
-            let y;
             commentId = el.id;
 
             if (!user) {

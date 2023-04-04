@@ -17,7 +17,7 @@ const PlaylistDetail = () => {
     useEffect(() => {
         dispatch(getPlaylistId(id));
     }, [dispatch]);
-
+    console.log(playlist[0]);
     return (
         <>
             <div className="playlist-section">
@@ -25,7 +25,6 @@ const PlaylistDetail = () => {
                     {playlist?.map((el) => {
                         // console.log(el);
                         // console.log(el.Songs);
-                        // console.log(el);
                         return (
                             <>
                                 <div className="playlist-title">
@@ -35,9 +34,9 @@ const PlaylistDetail = () => {
                                         className="playlist-songImg"
                                     ></img>
                                 </div>
-                                {el?.Songs?.map((songs) => {
+                                {el?.Songs?.map((songs, i) => {
                                     return (
-                                        <div className="song-list-item">
+                                        <div key={i} className="song-list-item">
                                             <i
                                                 className="fa-solid fa-play playlist-playBtn"
                                                 onClick={() => {
