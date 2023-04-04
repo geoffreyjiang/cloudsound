@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { getAllPlaylist } from "../../store/playlists";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-
+import PlaylistModal from "../Modals/PlaylistModal/playlistModal";
 const GetPlaylists = () => {
     const playlists = useSelector((state) => Object.values(state.playlists));
     const state = useSelector((state) => console.log(state));
@@ -38,6 +38,7 @@ const GetPlaylists = () => {
         <>
             <div className="browse-text">
                 <h2>Browse Playlists</h2>
+                <PlaylistModal />
             </div>
             <div className="wrapper">
                 <button
