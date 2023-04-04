@@ -15,20 +15,20 @@ const PlaylistDetail = () => {
     const [songImg, setSongImg] = useState();
     useEffect(() => {
         dispatch(getPlaylistId(id));
-        setSongImg(playlist?.imageUrl);
-    }, [dispatch, songImg]);
+        // setSongImg(playlist?.imageUrl);
+    }, [dispatch]);
     console.log(songImg);
-    console.log(playlist.imageUrl);
+    console.log(playlist?.imageUrl);
+    let img;
+    if (!songImg) img = playlist?.imageUrl;
+    else img = songImg;
     return (
         <>
             <div className="playlist-section">
                 <div className="playlist-container">
                     <div className="playlist-title">
                         <h1>{playlist?.name}</h1>
-                        <img
-                            src={playlist?.imageUrl}
-                            className="playlist-songImg"
-                        ></img>
+                        <img src={img} className="playlist-songImg"></img>
                     </div>
                     {playlist?.Songs?.map((songs, i) => {
                         return (
