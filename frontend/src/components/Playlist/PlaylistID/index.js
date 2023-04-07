@@ -4,7 +4,7 @@ import { getPlaylistId, getAllPlaylist } from "../../../store/playlists";
 import { useDispatch, useSelector } from "react-redux";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
-
+import PlaylistSongModal from "../../Modals/PlaylistSongModal/playlistSongModal";
 import "./index.css";
 const PlaylistDetail = () => {
     const { id } = useParams();
@@ -26,6 +26,7 @@ const PlaylistDetail = () => {
         <>
             <div className="playlist-section">
                 <div className="playlist-container">
+                    <PlaylistSongModal />
                     <div className="playlist-title">
                         <h1>{playlist?.name}</h1>
                         <img src={img} className="playlist-songImg"></img>
