@@ -1,0 +1,32 @@
+.playlist-song-list {
+    display: flex;
+    justify-content: center;
+}
+
+.playlistSong-img {
+    width: 30x;
+    height: 30px;
+}
+
+.playlistSong-item > audio {
+    width: 115px;
+    height: 25px;
+}
+
+.playlistSong-item > audio::-webkit-media-controls-panel {
+    -webkit-justify-content: center;
+    height: 25px;
+}
+
+/* Removes the timeline */
+.playlistSong-item > audio::-webkit-media-controls-timeline {
+    display: none !important;
+}
+
+/* Removes the time stamp */
+.playlistSong-item > audio::-webkit-media-controls-current-time-display {
+    display: none;
+}
+.playlistSong-item > audio::-webkit-media-controls-time-remaining-display {
+    display: none;
+}

@@ -49,9 +49,9 @@ const PlaylistDetail = () => {
                     })}
                 </div>
             </div>
-            <div className="audio-player-container">
+            {/* <div className="audio-player-container">
                 <AudioPlayer src={currSong} header={songTitle} />
-            </div>
+            </div> */}
         </>
     );
 };

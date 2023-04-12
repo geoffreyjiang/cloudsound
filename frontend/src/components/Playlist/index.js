@@ -24,10 +24,10 @@ const GetPlaylists = () => {
                             alt="no pic avail!"
                         ></img>
                         <div className="song-title">
-                            <Link to={`/playlists/${el.id}`}>
+                            <Link to={`/playlists/${el?.id}`}>
                                 <i className="fa-solid fa-play fa-2x song-btn "></i>
                                 <br></br>
-                                {el.name}
+                                {el?.name}
                             </Link>
                         </div>
                     </div>
