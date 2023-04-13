@@ -40,17 +40,30 @@ router.post("/", restoreUser, async (req, res) => {
     res.json(playlist);
 });
 
-router.post("/:id", restoreUser, async (req, res) => {
+router.post("/:id/add", restoreUser, async (req, res) => {
     const { id } = req.params;
     const { songId } = req.body;
+
     const playlist = await Playlist.findByPk(id);
+    console.log(id);
+    if (!playlist) {
+        return res.status(404).json({ message: "Playlist not found" });
+    }
+
     const song = await Song.findByPk(songId);
-    playlist.Songs.push(songId);
-    // await PlaylistSong.create({
-    //     songId: playlist.id,
-    //     playlistId: song.id,
-    // });
-    console.log(playlist);
-    res.json(playlist);
+
+    if (!song) {
+        return res.status(404).json({ message: "Song not found" });
+    }
+
+    await playlist.addSong(song);
+
+    return res.json(playlist);
 });
 module.exports = router;
+
+// PlaylistSong.create({
+//     songId: song.id,
+//     playlistId: id,
+// });
+// res.json(playlist);
