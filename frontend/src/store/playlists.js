@@ -66,6 +66,26 @@ export const createPlaylist = (playlist) => async (dispatch) => {
         dispatch(create(data));
     }
 };
+// export const deleteComment = (id) => async (dispatch) => {
+//     const res = await csrfFetch(`/api/comments/${id}`, {
+//         method: "DELETE",
+//     });
+//     if (res.ok) {
+//         dispatch(remove(id));
+//     }
+// };
+
+// export const editComment = (id, comment) => async (dispatch) => {
+//     const res = await csrfFetch(`/api/comments/${id}`, {
+//         method: "PUT",
+//         body: JSON.stringify(comment),
+//     });
+//     if (res.ok) {
+//         const data = await res.json();
+//         dispatch(edit(data));
+//     }
+//     return res;
+// };
 
 const playlistReducer = (state = {}, action) => {
     // console.log(action);

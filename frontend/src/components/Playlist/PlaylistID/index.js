@@ -10,6 +10,7 @@ const PlaylistDetail = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const playlist = useSelector((store) => store.playlists[id]);
+    const userId = useSelector((store) => store.session.user.id);
     const [currSong, setCurrSong] = useState("");
     const [songTitle, setSongTitle] = useState("");
     const [songImg, setSongImg] = useState();
@@ -17,8 +18,8 @@ const PlaylistDetail = () => {
         dispatch(getPlaylistId(id));
         // setSongImg(playlist?.imageUrl);
     }, [dispatch]);
-    console.log(songImg);
-    console.log(playlist?.imageUrl);
+    // console.log(userId);
+    // console.log(playlist?.imageUrl);
     let img;
     if (!songImg) img = playlist?.imageUrl;
     else img = songImg;
@@ -26,7 +27,9 @@ const PlaylistDetail = () => {
         <>
             <div className="playlist-section">
                 <div className="playlist-container">
-                    <PlaylistSongModal />
+                    {userId === playlist?.userId ? (
+                        <PlaylistSongModal playlistId={playlist.id} />
+                    ) : null}
                     <div className="playlist-title">
                         <h1>{playlist?.name}</h1>
                         <img src={img} className="playlist-songImg"></img>
@@ -49,9 +52,9 @@ const PlaylistDetail = () => {
                     })}
                 </div>
             </div>
-            {/* <div className="audio-player-container">
+            <div className="audio-player-container">
                 <AudioPlayer src={currSong} header={songTitle} />
-            </div> */}
+            </div>
         </>
     );
 };

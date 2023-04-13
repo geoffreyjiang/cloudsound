@@ -1,6 +1,13 @@
+/* .add-playlistSong-container {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+} */
+
 .playlist-song-list {
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .playlistSong-img {
@@ -9,8 +16,8 @@
 }
 
 .playlistSong-item > audio {
-    width: 115px;
-    height: 25px;
+    width: 100px;
+    height: 20px;
 }
 
 .playlistSong-item > audio::-webkit-media-controls-panel {

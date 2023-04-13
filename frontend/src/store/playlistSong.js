@@ -1,29 +1,35 @@
+import { csrfFetch } from "./csrf";
+
 const ADD = "playlist/ADD";
 const DELETE = "playlist/DELETE";
 
-// const addToPlaylist = (song) => ({
-//     type: ADD,
-//     song,
-// });
+const addToPlaylist = (song) => ({
+    type: ADD,
+    song,
+});
 
-// const removeFromPlaylist = (song) => ({
-//     type: DELETE,
-//     song,
-// });
+const removeFromPlaylist = (song) => ({
+    type: DELETE,
+    song,
+});
 
-export const addPlaylistSong = (id) => async (dispatch) => {
-    const res = await fetch(`/api/playlists/${id}`, {
+export const addPlaylistSong = (playlistId, songId) => async (dispatch) => {
+    // console.log(playlistId);
+    const res = await csrfFetch(`/api/playlists/${playlistId}/add`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ songId, playlistId }),
     });
-
     if (res.ok) {
         const data = await res.json();
+        dispatch(addToPlaylist(data));
     }
 };
 
 export const removePlaylistSong = (sessionUser, id) => async (dispatch) => {
-    const res = await fetch(`/api/users/${id}`, {
+    const res = await csrfFetch(`/api/users/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
     });
