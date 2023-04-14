@@ -1,11 +1,12 @@
 // import GetAllSongs from "../Songs";
+import { useSelector } from "react-redux";
 import "./home.css";
 // import { useHistory } from "react-router-dom";
 const HomePage = () => {
-    // const history = useHistory();
-    // const btn = () => {
-    //   history.push(`/songs`);
-    // };
+    const user = useSelector((store) => store.session.user);
+    let to;
+    if (!user) to = "/login";
+    else to = "/songs";
     return (
         <>
             <div className="home-container">
@@ -40,7 +41,7 @@ const HomePage = () => {
                 <div className="home-text">
                     <h1>Welcome to CloudSound! </h1>
                 </div>
-                <a className="home-text" href={`/songs`}>
+                <a className="home-text" href={to}>
                     <i className="fa-solid fa-circle-play fa-6x  play-btn"></i>
                 </a>
                 <div className="home-text">

@@ -3,11 +3,12 @@ import { getAllSongs } from "../../store/songs";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./Songs.css";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import GetPlaylists from "../Playlist";
 // import SongDetail from "./SongDetail";
 const GetAllSongs = () => {
     const songs = useSelector((state) => Object.values(state.songs));
+    const user = useSelector((store) => store.session.user);
     const dispatch = useDispatch();
     const history = useHistory();
     useEffect(() => {
@@ -16,6 +17,9 @@ const GetAllSongs = () => {
         };
         load();
     }, [dispatch]);
+    if (!user) {
+        return <Redirect to="/" />;
+    }
 
     let data;
 

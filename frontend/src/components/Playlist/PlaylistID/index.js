@@ -25,6 +25,7 @@ const PlaylistDetail = () => {
     let img;
     if (!songImg) img = playlist?.imageUrl;
     else img = songImg;
+    console.log(userId);
     return (
         <>
             <div className="playlist-section">
