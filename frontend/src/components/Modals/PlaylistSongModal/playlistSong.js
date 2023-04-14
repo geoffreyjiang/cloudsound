@@ -43,12 +43,13 @@ const AddPlaylistSongs = ({ playlistId }) => {
                                 (pSong) => pSong.id === song.id
                             )
                     )
-                    .map((song) => {
+                    .map((song, i) => {
                         const isSelected = song === selectedSong;
 
                         return (
                             <div
                                 className="playlist-song-list"
+                                key={i}
                                 // onClick={() => {
                                 //     setSongId(el.id);
                                 //     setSrc(el.url);
@@ -59,7 +60,7 @@ const AddPlaylistSongs = ({ playlistId }) => {
                                 className="playlistSong-img"
                             ></img> */}
                                 <i
-                                    class="fa-solid fa-plus"
+                                    className="fa-solid fa-plus"
                                     onClick={async () => {
                                         await dispatch(
                                             addPlaylistSong(playlistId, song.id)

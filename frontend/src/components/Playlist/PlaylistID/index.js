@@ -51,7 +51,7 @@ const PlaylistDetail = () => {
                                 </i>
                                 {userId === playlist?.userId ? (
                                     <i
-                                        class="fa-solid fa-minus"
+                                        className="fa-solid fa-minus"
                                         onClick={async () => {
                                             await dispatch(
                                                 removePlaylistSong(id, songs.id)
