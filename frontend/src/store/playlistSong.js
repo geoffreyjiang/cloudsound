@@ -28,13 +28,15 @@ export const addPlaylistSong = (playlistId, songId) => async (dispatch) => {
     }
 };
 
-export const removePlaylistSong = (sessionUser, id) => async (dispatch) => {
-    const res = await csrfFetch(`/api/users/${id}`, {
+export const removePlaylistSong = (playlistId, songId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/playlists/${playlistId}/remove`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ songId, playlistId }),
     });
     if (res.ok) {
         const data = await res.json();
+        dispatch(removeFromPlaylist(data));
     }
 };
 

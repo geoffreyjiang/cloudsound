@@ -60,6 +60,28 @@ router.post("/:id/add", restoreUser, async (req, res) => {
 
     return res.json(playlist);
 });
+
+router.delete("/:id/remove", async (req, res) => {
+    const { id } = req.params;
+    const { songId } = req.body;
+
+    const playlist = await Playlist.findByPk(id);
+
+    if (!playlist) {
+        return res.status(404).json({ message: "Playlist not found" });
+    }
+
+    const song = await Song.findByPk(songId);
+
+    if (!song) {
+        return res.status(404).json({ message: "Song not found" });
+    }
+
+    await playlist.removeSong(song);
+
+    return res.json(playlist);
+});
+
 module.exports = router;
 
 // PlaylistSong.create({

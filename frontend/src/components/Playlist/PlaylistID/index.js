@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useHistory, Redirect } from "react-router-dom";
-import { getPlaylistId, getAllPlaylist } from "../../../store/playlists";
+import { getPlaylistId } from "../../../store/playlists";
+import { getAllSongs } from "../../../store/songs";
 import { useDispatch, useSelector } from "react-redux";
 import AudioPlayer from "react-h5-audio-player";
+import { removePlaylistSong } from "../../../store/playlistSong";
 import "react-h5-audio-player/lib/styles.css";
 import PlaylistSongModal from "../../Modals/PlaylistSongModal/playlistSongModal";
 import "./index.css";
@@ -47,6 +49,18 @@ const PlaylistDetail = () => {
                                 >
                                     {songs.title}
                                 </i>
+                                {userId === playlist?.userId ? (
+                                    <i
+                                        class="fa-solid fa-minus"
+                                        onClick={async () => {
+                                            await dispatch(
+                                                removePlaylistSong(id, songs.id)
+                                            );
+                                            await dispatch(getPlaylistId(id));
+                                            await dispatch(getAllSongs());
+                                        }}
+                                    ></i>
+                                ) : null}
                             </div>
                         );
                     })}
