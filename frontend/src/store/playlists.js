@@ -66,26 +66,26 @@ export const createPlaylist = (playlist) => async (dispatch) => {
         dispatch(create(data));
     }
 };
-// export const deleteComment = (id) => async (dispatch) => {
-//     const res = await csrfFetch(`/api/comments/${id}`, {
-//         method: "DELETE",
-//     });
-//     if (res.ok) {
-//         dispatch(remove(id));
-//     }
-// };
+export const deletePlaylist = (id) => async (dispatch) => {
+    const res = await csrfFetch(`/api/playlists/${id}`, {
+        method: "DELETE",
+    });
+    if (res.ok) {
+        dispatch(remove(id));
+    }
+};
 
-// export const editComment = (id, comment) => async (dispatch) => {
-//     const res = await csrfFetch(`/api/comments/${id}`, {
-//         method: "PUT",
-//         body: JSON.stringify(comment),
-//     });
-//     if (res.ok) {
-//         const data = await res.json();
-//         dispatch(edit(data));
-//     }
-//     return res;
-// };
+export const editPlaylist = (playlistId, playlist) => async (dispatch) => {
+    console.log(playlist);
+    const res = await csrfFetch(`/api/playlists/${playlistId}/update`, {
+        method: "PUT",
+        body: JSON.stringify(playlist),
+    });
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(edit(data));
+    }
+};
 
 const playlistReducer = (state = {}, action) => {
     // console.log(action);
@@ -98,12 +98,12 @@ const playlistReducer = (state = {}, action) => {
             return newState;
         case GETID:
             return { ...newState, [action.playlist.id]: action.playlist };
-        // return {
-        //     [action.playlist.id]: {
-        //         ...state[action.playlist.id],
-        //         ...action.playlist,
-        //     },
-        // };
+        case DELETE:
+            delete newState[action.id];
+            return newState;
+        case UPDATE:
+            newState = { ...state, [action.playlist.id]: action.playlist };
+            return newState;
         default:
             return state;
     }

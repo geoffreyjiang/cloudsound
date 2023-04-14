@@ -27,7 +27,7 @@ const GetAllSongs = () => {
         data = songs.map((el, i) => {
             return (
                 <>
-                    <div key={i} className="song-details">
+                    <div key={el.id} className="song-details">
                         <audio src={el.url}></audio>
                     </div>
                     <div key={el.id} className="card">

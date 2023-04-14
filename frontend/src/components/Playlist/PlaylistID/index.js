@@ -7,6 +7,7 @@ import AudioPlayer from "react-h5-audio-player";
 import { removePlaylistSong } from "../../../store/playlistSong";
 import "react-h5-audio-player/lib/styles.css";
 import PlaylistSongModal from "../../Modals/PlaylistSongModal/playlistSongModal";
+import EditPlaylistModal from "../../Modals/EditPlaylistModal/editPlaylistModal";
 import "./index.css";
 const PlaylistDetail = () => {
     const { id } = useParams();
@@ -31,7 +32,10 @@ const PlaylistDetail = () => {
             <div className="playlist-section">
                 <div className="playlist-container">
                     {userId === playlist?.userId ? (
-                        <PlaylistSongModal playlistId={playlist.id} />
+                        <div className="playlist-user-btn">
+                            <PlaylistSongModal playlistId={playlist.id} />
+                            <EditPlaylistModal playlistId={playlist.id} />
+                        </div>
                     ) : null}
                     <div className="playlist-title">
                         <h1>{playlist?.name}</h1>

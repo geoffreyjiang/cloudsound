@@ -32,3 +32,15 @@ export function Modal({ onClose, children }) {
         modalNode
     );
 }
+
+export function EPlaylistModal({ onClose, children }) {
+    const modalNode = useContext(ModalContext);
+    if (!modalNode) return null;
+    return ReactDOM.createPortal(
+        <div id="modal">
+            <div id="modal-background" onClick={onClose} />
+            <div id="edit-modal-content">{children}</div>
+        </div>,
+        modalNode
+    );
+}

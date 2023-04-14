@@ -10,11 +10,6 @@ const HomePage = () => {
     return (
         <>
             <div className="home-container">
-                {/* <img
-          className="home-img"
-          src="https://cdn.pixabay.com/photo/2016/03/30/05/41/music-1290087_960_720.jpg"
-          alt="home page img"
-        ></img> */}
                 <div className="cloud">
                     <i className="fa-solid fa-cloud-showers-heavy fa-2x"></i>
                     <i className="fa-solid fa-cloud-showers-heavy fa-2x"></i>

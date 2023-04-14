@@ -28,6 +28,21 @@ router.get("/:id", async (req, res) => {
     return res.json(playlist);
 });
 
+router.put("/:id/update", restoreUser, async (req, res) => {
+    const { id } = req.params;
+    const { name, imageUrl } = req.body;
+    const playlist = await Playlist.findByPk(id, {
+        include: {
+            model: Song,
+            through: {
+                attributes: [],
+            },
+        },
+    });
+    await playlist.update({ name, imageUrl });
+    res.json(playlist);
+});
+
 router.post("/", restoreUser, async (req, res) => {
     const { user } = req;
     const current = user.toSafeObject();
@@ -80,6 +95,13 @@ router.delete("/:id/remove", async (req, res) => {
     await playlist.removeSong(song);
 
     return res.json(playlist);
+});
+
+router.delete("/:id", async (req, res) => {
+    const { id } = req.params;
+    const playlist = await Playlist.findByPk(id);
+    await playlist.destroy();
+    res.json("playlist deleted");
 });
 
 module.exports = router;
