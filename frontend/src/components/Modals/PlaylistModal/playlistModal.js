@@ -6,6 +6,7 @@ const PlaylistModal = () => {
     return (
         <>
             <button onClick={() => setOpen(true)}>Create Playlist</button>
+            {/* <i className="fa-solid fa-plus" onClick={() => setOpen(true)}></i> */}
             {open && (
                 <Modal onClose={() => setOpen(false)}>
                     <PlaylistForm setOpen={setOpen} />

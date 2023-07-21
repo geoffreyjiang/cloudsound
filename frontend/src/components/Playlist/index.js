@@ -37,8 +37,10 @@ const GetPlaylists = () => {
     }
     return (
         <>
-            <div className="browse-text">
+            <div className="playlist-browse-text">
                 <h2>Browse Playlists</h2>
+            </div>
+            <div className="create-playlist">
                 <PlaylistModal />
             </div>
             <div className="wrapper">
