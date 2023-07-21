@@ -4,10 +4,8 @@ const { Song, Album, User, Comment } = require("../../db/models");
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
 const {
     singlePublicFileUpload,
-    multiplePublicFileUpload,
     multipleFileKeysUpload,
-    multipleMulterUpload,
-} = require("../../awsS3.js");
+} = require("../../awsS3");
 
 router.post("/:id/comments", restoreUser, async (req, res) => {
     const { id } = req.params;
@@ -64,57 +62,69 @@ router.get("/:id/comments", async (req, res) => {
     res.json(comment);
 });
 
-router.post("/", restoreUser, async (req, res) => {
-    const { user } = req;
-    const current = user.toSafeObject();
-    // const { title, description, url, imageUrl, albumId } = req.body;
-    // const album = await Album.findOne({ where: { id: albumId } });
-    const { title, description, url, imageUrl, username } = req.body;
+router.post(
+    "/",
+    restoreUser,
+    multipleFileKeysUpload([
+        { name: "imageUrl", maxCount: 1 },
+        { name: "url", maxCount: 1 },
+    ]),
+    async (req, res) => {
+        const { user } = req;
+        const current = user.toSafeObject();
+        // const { title, description, url, imageUrl, albumId } = req.body;
+        // const album = await Album.findOne({ where: { id: albumId } });
+        const { title, description, url, imageUrl, username } = req.body;
+        if (url) await singlePublicFileUpload(req.files.url[0]);
+        if (imageUrl) await singlePublicFileUpload(req.files.imageUrl[0]);
+        // if (!album) {
+        //   res.status(404);
+        //   res.json({
+        //     message: "Album couldn't be found",
+        //     statusCode: 404,
+        //   });
+        // } else
+        if (!title && !url) {
+            const error = new Error("Validation Error");
+            error.status = 400;
+            error.errors = {
+                statusCode: 400,
+                error: {
+                    title: "Song title is required",
+                    url: "Audio is required",
+                },
+            };
+            throw error;
+        } else if (!title) {
+            const error = new Error("Validation Error");
+            error.status = 400;
+            error.errors = {
+                statusCode: 400,
+                error: { title: "Song title is required" },
+            };
+            throw error;
+        } else if (!url) {
+            const error = new Error("Validation Error");
+            error.status = 400;
+            error.errors = {
+                statusCode: 400,
+                error: { url: "Audio is required" },
+            };
+            throw error;
+        }
+        const song = await Song.create({
+            title,
+            description,
+            url,
+            imageUrl,
+            // albumId,
+            username,
+            userId: current.id,
+        });
 
-    // if (!album) {
-    //   res.status(404);
-    //   res.json({
-    //     message: "Album couldn't be found",
-    //     statusCode: 404,
-    //   });
-    // } else
-    if (!title && !url) {
-        const error = new Error("Validation Error");
-        error.status = 400;
-        error.errors = {
-            statusCode: 400,
-            error: {
-                title: "Song title is required",
-                url: "Audio is required",
-            },
-        };
-        throw error;
-    } else if (!title) {
-        const error = new Error("Validation Error");
-        error.status = 400;
-        error.errors = {
-            statusCode: 400,
-            error: { title: "Song title is required" },
-        };
-        throw error;
-    } else if (!url) {
-        const error = new Error("Validation Error");
-        error.status = 400;
-        error.errors = { statusCode: 400, error: { url: "Audio is required" } };
-        throw error;
+        res.json(song);
     }
-    const song = await Song.create({
-        title,
-        description,
-        url,
-        imageUrl,
-        // albumId,
-        username,
-        userId: current.id,
-    });
-
-    res.json(song);
-});
+);
 
 router.get("/current", restoreUser, async (req, res) => {
     const { user } = req;
