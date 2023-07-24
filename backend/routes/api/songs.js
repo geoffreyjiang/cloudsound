@@ -4,7 +4,7 @@ const { Song, Album, User, Comment } = require("../../db/models");
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
 const {
     singlePublicFileUpload,
-    multipleFileKeysUpload,
+    multiplePublicFileUpload,
 } = require("../../awsS3");
 
 router.post("/:id/comments", restoreUser, async (req, res) => {
@@ -65,10 +65,10 @@ router.get("/:id/comments", async (req, res) => {
 router.post(
     "/",
     restoreUser,
-    multipleFileKeysUpload([
-        { name: "imageUrl", maxCount: 1 },
-        { name: "url", maxCount: 1 },
-    ]),
+    // multiplePublicFileUpload([
+    //     { name: "imageUrl", maxCount: 1 },
+    //     { name: "url", maxCount: 1 },
+    // ]),
     async (req, res) => {
         const { user } = req;
         const current = user.toSafeObject();

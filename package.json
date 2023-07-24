@@ -22,5 +22,9 @@
     "bugs": {
         "url": "https://github.com/geoffreyjiang/cloudsound/issues"
     },
-    "homepage": "https://github.com/geoffreyjiang/cloudsound#readme"
+    "homepage": "https://github.com/geoffreyjiang/cloudsound#readme",
+    "dependencies": {
+        "aws-sdk": "^2.1419.0",
+        "multer": "^1.4.5-lts.1"
+    }
 }
