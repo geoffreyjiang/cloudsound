@@ -65,10 +65,10 @@ router.get("/:id/comments", async (req, res) => {
 router.post(
     "/",
     restoreUser,
-    // multiplePublicFileUpload([
-    //     { name: "imageUrl", maxCount: 1 },
-    //     { name: "url", maxCount: 1 },
-    // ]),
+    multiplePublicFileUpload([
+        { name: "imageUrl", maxCount: 1 },
+        { name: "url", maxCount: 1 },
+    ]),
     async (req, res) => {
         const { user } = req;
         const current = user.toSafeObject();
