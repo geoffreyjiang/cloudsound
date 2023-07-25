@@ -70,12 +70,20 @@ export const getAllSongs = () => async (dispatch) => {
 };
 export const createSong = (song) => async (dispatch) => {
     // console.log(song);
+
+    const { title, imageUrl, url, description } = song;
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    if (imageUrl) formData.append("imageUrl", imageUrl);
+    if (url) formData.append("url", url);
+
     const res = await csrfFetch("/api/songs", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
         },
-        body: JSON.stringify(song),
+        body: formData,
     });
     if (res.ok) {
         const data = await res.json();
