@@ -75,7 +75,7 @@ export const createSong = (song) => async (dispatch) => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
-    if (imageUrl) formData.append("imageUrl", imageUrl);
+    formData.append("imageUrl", imageUrl);
     if (url) formData.append("url", url);
 
     const res = await csrfFetch("/api/songs", {
